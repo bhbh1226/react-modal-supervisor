@@ -1,2 +1,4 @@
 /node_modules/
 /.well-known/
+.npmignore
+/dist/
