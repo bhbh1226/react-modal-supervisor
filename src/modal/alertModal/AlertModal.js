@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react'
-import Modal from '../Modal';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
-import { Background, flexRow, flexColumn } from '../../Container';
-import { CloseButtonAbsolute } from '../../Button';
+
+import Modal from '../Modal';
+import { Background, flexRow, flexColumn } from '../../components/Container';
+import { CloseButtonAbsolute } from '../../components/Button';
 
 const AlertModalBackground = styled(Background)``
 const AlertModalInner = styled.div`

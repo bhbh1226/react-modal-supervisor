@@ -1,8 +1,16 @@
 {
   "name": "react-modal-manager",
   "version": "1.0.0",
-  "description": "react-modal-manager",
-  "main": "index.js",
+  "description": "react-modal-manager by bhbh1226",
+  "engines": { "npm" : "~6.4.1" },
+  "main": "./src/ModalManager.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bhbh1226/react-modal-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bhbh1226/react-modal-manager/issues"
+  },
   "scripts": {
     "compile": "webpack --config webpack.prod.js",
     "dev-compile": "webpack --config webpack.dev.js --watch",

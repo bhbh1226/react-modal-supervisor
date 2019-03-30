@@ -1,9 +1,9 @@
 import React, { Component, createContext } from 'react';
 
-import Modal from './Modal';
-import AlertModal from './alertModal/AlertModal';
-import ConfirmModal from './confirmModal/ConfirmModal';
-import LoadingModal from './loadingModal/LoadingModal';
+import Modal from './modal/Modal';
+import AlertModal from './modal/alertModal/AlertModal';
+import ConfirmModal from './modal/confirmModal/ConfirmModal';
+import LoadingModal from './modal/loadingModal/LoadingModal';
 
 const Context = createContext();
 const { Provider, Consumer: PageContextConsumer } = Context; 

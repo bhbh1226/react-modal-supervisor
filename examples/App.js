@@ -1,5 +1,5 @@
 import React from 'react'
-import ModalManager from './components/modal/ModalManager';
+import ModalManager from '../src/ModalManager';
 import './normalize.css'
 // import Header from './components/Header'
 

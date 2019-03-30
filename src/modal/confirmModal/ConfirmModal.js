@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import Modal from '../Modal';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ConfirmButton, DismissButton } from '../../Button';
-import { Background, flexColumn, flexCenter, flexRow } from '../../Container';
+import Modal from '../Modal';
+import { ConfirmButton, DismissButton } from '../../components/Button';
+import { Background, flexColumn, flexCenter, flexRow } from '../../components/Container';
 
 
 const ConfirmModalBackground = styled(Background)``
