@@ -4,7 +4,7 @@
   "description": "react modal supervisor based-on Array!",
   "keywords": ["react", "modal", "supervisor", "react-modal", "ContextAPI", "react-modal-supervisor"],
   "engines": { "npm" : "~6.4.1" },
-  "main": "./src/ModalSupervisor.js",
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/bhbh1226/react-modal-supervisor.git"
