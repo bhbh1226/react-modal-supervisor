@@ -1,0 +1,109 @@
+.confirm-modal-background {
+    display: flex;
+    flex-flow: column;
+
+    width: 100%;
+    height: 100%;
+
+    justify-content: center;
+    align-items: center;
+
+    .confirm-modal-inner {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        min-width: 30em;
+        min-height: 10em;
+
+        padding: 3em;
+
+        border-radius: 5px;
+        background-color: white;
+
+        justify-content: center;
+        align-items: center;
+
+        input {
+            margin: 3em 0;
+
+            width: 100%;
+
+            outline: none;
+
+            &[type="text"], &[type="password"] {
+                padding: 0.5em;
+
+                border: none;
+                border-bottom: 2px solid rgba(#FF9C00, 0.7);
+            }
+        }
+
+        .modal-action-container {
+            display: flex;
+            flex-direction: row;
+
+            box-sizing: border-box;
+
+            justify-content: center;
+            align-items: center;
+
+            & > button {
+                min-width: 40%;
+                min-height: 3em;
+
+                margin: 0 2em;
+
+                border: none;
+                border-radius: 5px;
+                border-bottom: 3px solid rgba(#AEAEAE, .9);
+                background-color: rgba(#AEAEAE, .65);
+                color: white;
+
+                outline: none;
+
+                transition: 100ms;
+
+                &:hover {
+                    background-color: rgba(#AEAEAE, .7);
+                }
+
+                &:active {
+                    // margin-top: 3px;
+                    background-color: rgba(#AEAEAE, 1);
+                    border-bottom: 0px solid rgba(#AEAEAE, .9);
+                }
+
+                &.confirm-button {
+                    border-bottom: 3px solid rgba(#07c264, .9);
+                    background-color: rgba(#07c264, .65);
+                    
+                    &:hover {
+                        background-color: rgba(#07c264, .7);
+                    }
+    
+                    &:active {
+                        // margin-top: 3px;
+                        background-color: rgba(#07c264, 1);
+                        border-bottom: 0px solid rgba(#07c264, .9);
+                    }
+                }
+
+                &.dismiss-button {
+                    border-bottom: 3px solid rgba(#cf440d, .9);
+                    background-color: rgba(#cf440d, .65);
+                    
+                    &:hover {
+                        background-color: rgba(#cf440d, .7);
+                    }
+    
+                    &:active {
+                        // margin-top: 3px;
+                        background-color: rgba(#cf440d, 1);
+                        border-bottom: 0px solid rgba(#cf440d, .9);
+                    }
+                }
+            }
+        }
+    }
+}

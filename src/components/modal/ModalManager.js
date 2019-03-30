@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Modal from './Modal';
 import AlertModal from './alertModal/AlertModal';
+import ConfirmModal from './confirmModal/ConfirmModal';
+import LoadingModal from './loadingModal/LoadingModal';
 
 /* CONSTANTS */
 
@@ -16,23 +18,50 @@ class ModalManager extends Component {
         super(props)
 
         this.state = {
-            modals = [
+            modals: [
                 { type: MODAL_TYPE_ALERT, text: "위험합니다." },
                 { type: MODAL_TYPE_CONFIRM, text: "집에 가시겠습니까?" },
-                // { type: MODAL_TYPE_LOADING }
+                { type: MODAL_TYPE_LOADING }
             ]
         }
-    }  
+    }
+
+    closeModalIdx(idx) {
+        this.setState(
+            (prevState) => {
+                return {
+                    ...prevState,
+                    modals: prevState.modals.filter((item, i) => idx !== i) 
+                }
+            }
+        )
+    }
 
     render() {
         return (
             <div id="modal-manager">
                 {
-                    this.state.modals.map((modal_info) => {
-                        <div>
-                            <h1>{modal_info.type}</h1>
-                            <h1>{modal_info.text}</h1>
-                        </div>
+                    this.state.modals.map((modal_info, idx) => {
+                        switch(modal_info.type) {
+                            case MODAL_TYPE_ALERT:
+                                return (
+                                    <AlertModal key={idx} onClose={() => {this.closeModalIdx.bind(this)(idx)}}>
+                                        <h1>{modal_info.text}</h1>
+                                    </AlertModal>
+                                )
+
+                            case MODAL_TYPE_CONFIRM:
+                                return (
+                                    <ConfirmModal onConfirm={() => {this.closeModalIdx.bind(this)(idx)}} onDismiss={() => {this.closeModalIdx.bind(this)(idx)}} >
+                                        <h1>{modal_info.text}</h1>
+                                    </ConfirmModal>
+                                )
+                            
+                            case MODAL_TYPE_LOADING:
+                                return (
+                                    <LoadingModal/>
+                                )
+                        }
                     })
                 }
             </div>
