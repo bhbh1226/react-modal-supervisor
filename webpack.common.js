@@ -1,11 +1,12 @@
 module.exports = {
   entry: {
-    index: './/examples/index.js'
+    index: './src'
   },
   output: {
     path: __dirname + "/dist/public",
     publicPath: "/public/",
-    filename: "bundle.js"
+    filename: "bundle.js",
+    libraryTarget: 'commonjs2' // THIS IS THE MOST IMPORTANT LINE! :mindblow: I wasted more than 2 days until realize this was the line most important in all this guide.
   },
   module: {
     loaders: [
@@ -56,5 +57,8 @@ module.exports = {
         }
       }
     ]
+  },
+  externals: {
+    'react': 'commonjs react' // this line is just to use the React dependency of our parent-testing-project instead of using our own React.
   }
 };

@@ -1,10 +1,19 @@
 {
   "name": "react-modal-supervisor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "react modal supervisor based-on Array!",
-  "keywords": ["react", "modal", "supervisor", "react-modal", "ContextAPI", "react-modal-supervisor"],
-  "engines": { "npm" : "~6.4.1" },
-  "main": "./index.js",
+  "keywords": [
+    "react",
+    "modal",
+    "supervisor",
+    "react-modal",
+    "ContextAPI",
+    "react-modal-supervisor"
+  ],
+  "engines": {
+    "npm": "~6.4.1"
+  },
+  "main": "./dist/public/bundle.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/bhbh1226/react-modal-supervisor.git"
@@ -20,11 +29,10 @@
     "nodemon": "nodemon .\\server.js localhost 8001"
   },
   "dependencies": {
-    "express": "^4.16.2",
-    "path": "^0.12.7"
+    "prop-types": "^15.7.2",
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -32,21 +40,17 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "css-loader": "^0.28.11",
+    "css-loader": "^2.1.1",
     "file-loader": "^1.1.11",
     "install": "^0.12.2",
-    "node-sass": "^4.8.3",
     "npm": "^6.9.0",
-    "prop-types": "^15.7.2",
     "react": "^16.3.2",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.1.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redirect-https": "^1.1.5",
-    "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
-    "styled-components": "^4.2.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",
     "webpack": "^3.10.0",

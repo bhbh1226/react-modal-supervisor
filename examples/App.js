@@ -1,5 +1,5 @@
 import React from 'react'
-import ModalSupervisor from '..';
+import ModalSupervisor from '../src';
 
 import './normalize.css'
 // import Header from './components/Header'
