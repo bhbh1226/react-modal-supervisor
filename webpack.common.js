@@ -16,7 +16,7 @@ module.exports = {
         query: {
           cacheDirectory: true,
           presets: ["es2015", "react"],
-          plugins: ["react-hot-loader/babel", "transform-class-properties"]
+          plugins: ["react-hot-loader/babel", "transform-class-properties", "transform-es2015-spread", "transform-object-rest-spread"]
         }
       },
       {
