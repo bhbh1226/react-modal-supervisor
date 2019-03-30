@@ -16,7 +16,7 @@ class MainPage extends Component {
             <div id="main-page">
                 <button onClick={() => {this.props.actions.createModal(MODAL_TYPE_ALERT, "안녕")}}>Open Modal</button>
                 <button onClick={() => {this.props.actions.createModal(MODAL_TYPE_CONFIRM, "정말?", () => {console.log('wow')}, () => {console.log('hello')})}}>Confirm Modal</button>
-                <button onClick={() => {this.props.actions.createModal(MODAL_TYPE_LOADING, "정말?"); setInterval(() => {
+                <button onClick={() => {this.props.actions.createModal(MODAL_TYPE_LOADING); setInterval(() => {
                     this.props.actions.popModal()
                 }, 2000);}}>Loading Modal</button>
             </div>
