@@ -4,7 +4,7 @@ import {
     MODAL_TYPE_ALERT, 
     MODAL_TYPE_CONFIRM, 
     MODAL_TYPE_LOADING
-    } from '../../src/ModalManager';
+    } from '../../src/ModalSupervisor';
 
 class MainPage extends Component {
     constructor(props) {

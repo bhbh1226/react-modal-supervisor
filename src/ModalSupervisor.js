@@ -17,6 +17,14 @@ const MODAL_TYPE_CONFIRM = 102
 /* REQUIRED: type */
 const MODAL_TYPE_LOADING = 103
 
+/* INITALIZE */
+
+const modalRootInit = () => {
+    const ModalRoot = document.createElement('div')
+    ModalRoot.id = "modal-root"
+    document.querySelector('body').appendChild(ModalRoot)
+}
+
 class ModalManager extends Component {
     constructor(props) {
         super(props)
@@ -117,5 +125,8 @@ let ModalManagerHOC = (WrappedComponent) => (props) => {
     )
 }
 
-export { MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING, ModalManagerHOC };
+export { 
+    MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING,
+    ModalManagerHOC,
+    modalRootInit };
 export default ModalManager;

@@ -1,15 +1,15 @@
 {
-  "name": "react-modal-manager",
+  "name": "react-modal-supervisor",
   "version": "1.0.0",
-  "description": "react-modal-manager by bhbh1226",
+  "description": "react",
   "engines": { "npm" : "~6.4.1" },
-  "main": "./src/ModalManager.js",
+  "main": "./src/ModalSupervisor.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/bhbh1226/react-modal-manager.git"
+    "url": "git://github.com/bhbh1226/react-modal-supervisor.git"
   },
   "bugs": {
-    "url": "https://github.com/bhbh1226/react-modal-manager/issues"
+    "url": "https://github.com/bhbh1226/react-modal-supervisor/issues"
   },
   "scripts": {
     "compile": "webpack --config webpack.prod.js",

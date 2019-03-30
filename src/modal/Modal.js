@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled, { keyframes } from 'styled-components'
-import { flexColumn, FullScreen } from '../Container';
+import { flexColumn, FullScreen } from '../components/Container';
 
 // import './style/Modal.css'
 
