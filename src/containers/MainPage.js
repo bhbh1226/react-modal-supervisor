@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
-import ModalManager from '../components/modal/ModalManager';
+import { 
+    ModalManagerHOC, 
+    MODAL_TYPE_ALERT, 
+    MODAL_TYPE_CONFIRM, 
+    MODAL_TYPE_LOADING
+    } from '../components/modal/ModalManager';
 
 class MainPage extends Component {
     constructor(props) {
@@ -9,11 +14,14 @@ class MainPage extends Component {
     render() {
         return (
             <div id="main-page">
-                <button>Open Modal</button>
-                <ModalManager></ModalManager>
+                <button onClick={() => {this.props.actions.createModal(MODAL_TYPE_ALERT, "안녕")}}>Open Modal</button>
+                <button onClick={() => {this.props.actions.createModal(MODAL_TYPE_CONFIRM, "정말?", () => {console.log('wow')}, () => {console.log('hello')})}}>Confirm Modal</button>
+                <button onClick={() => {this.props.actions.createModal(MODAL_TYPE_LOADING, "정말?"); setInterval(() => {
+                    this.props.actions.popModal()
+                }, 2000);}}>Loading Modal</button>
             </div>
         )
     }
 }
 
-export default MainPage
+export default ModalManagerHOC(MainPage)

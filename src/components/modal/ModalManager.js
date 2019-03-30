@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, createContext } from 'react';
+
 import Modal from './Modal';
 import AlertModal from './alertModal/AlertModal';
 import ConfirmModal from './confirmModal/ConfirmModal';
 import LoadingModal from './loadingModal/LoadingModal';
 
+const Context = createContext();
+const { Provider, Consumer: PageContextConsumer } = Context; 
+
 /* CONSTANTS */
 
 /* REQUIRED: type, text */
 const MODAL_TYPE_ALERT = 101
-/* REQUIRED: type, text */
+/* REQUIRED: type, text, onConfirm, onDismiss */
 const MODAL_TYPE_CONFIRM = 102
 /* REQUIRED: type */
 const MODAL_TYPE_LOADING = 103
@@ -18,68 +22,100 @@ class ModalManager extends Component {
         super(props)
 
         this.state = {
-            modals: [
-                { type: MODAL_TYPE_ALERT, text: "위험합니다." },
-                { type: MODAL_TYPE_CONFIRM, text: "집에 가시겠습니까?" },
-                { type: MODAL_TYPE_LOADING }
-            ]
+            modals: []
         }
     }
 
-    closeModalIdx(idx) {
-        this.setState(
-            (prevState) => {
+    actions = {
+        popModal: () => {
+            this.setState((prevState) => {
+                return {
+                    ...prevState,
+                    modals: [...prevState.modals.pop()] 
+                }
+            })
+        },
+        closeModalIdx: (idx) => {
+            this.setState((prevState) => {
                 return {
                     ...prevState,
                     modals: prevState.modals.filter((item, i) => idx !== i) 
                 }
-            }
-        )
+            })
+        },
+        createModal: (type, text, confirm, dismiss) => {
+            const modal = { type, text, confirm, dismiss }
+
+            this.setState((prevState) => {
+                return {
+                    ...prevState,
+                    modals: [...prevState.modals, modal]
+                }
+            })
+        },
+        addModal: (modal) => {
+            this.setState((prevState) => {
+                return {
+                    ...prevState,
+                    modals: [...prevState.modals, modal]
+                }
+            })
+        }
     }
 
     render() {
+        const { state, actions } = this;
+        const value = { state, actions };
+
         return (
             <div id="modal-manager">
-                {
-                    this.state.modals.map((modal_info, idx) => {
-                        switch(modal_info.type) {
-                            case MODAL_TYPE_ALERT:
-                                return (
-                                    <AlertModal key={idx} onClose={() => {this.closeModalIdx.bind(this)(idx)}}>
-                                        <h1>{modal_info.text}</h1>
-                                    </AlertModal>
-                                )
+                <Provider value={value}>
+                    {this.props.children}
+                    {
+                        this.state.modals.map((modal_info, idx) => {
+                            switch(modal_info.type) {
+                                case MODAL_TYPE_ALERT:
+                                    return (
+                                        <AlertModal key={idx} onClose={() => {this.actions.closeModalIdx.bind(this)(idx)}}>
+                                            <h1>{modal_info.text}</h1>
+                                        </AlertModal>
+                                    )
 
-                            case MODAL_TYPE_CONFIRM:
-                                return (
-                                    <ConfirmModal onConfirm={() => {this.closeModalIdx.bind(this)(idx)}} onDismiss={() => {this.closeModalIdx.bind(this)(idx)}} >
-                                        <h1>{modal_info.text}</h1>
-                                    </ConfirmModal>
-                                )
-                            
-                            case MODAL_TYPE_LOADING:
-                                return (
-                                    <LoadingModal/>
-                                )
-                        }
-                    })
-                }
+                                case MODAL_TYPE_CONFIRM:
+                                    return (
+                                        <ConfirmModal key={idx} onConfirm={() => {modal_info.confirm(); this.actions.closeModalIdx.bind(this)(idx)}} onDismiss={() => {modal_info.dismiss(); this.actions.closeModalIdx.bind(this)(idx)}} >
+                                            <h1>{modal_info.text}</h1>
+                                        </ConfirmModal>
+                                    )
+                                
+                                case MODAL_TYPE_LOADING:
+                                    return (
+                                        <LoadingModal key={idx}/>
+                                    )
+                            }
+                        })
+                    }
+                </Provider>
             </div>
         )
     }
 }
 
-
-
-const modalHOC = (url) => (WrappedComponent) => {
-    return class extends Component {
-        render() {
-            return (
-                <WrappedComponent {...this.props}/>
-            )
-        }
-    }
+let ModalManagerHOC = (WrappedComponent) => (props) => {
+    return (
+        <PageContextConsumer>
+            {
+                ({ state, actions }) => (
+                    <WrappedComponent
+                        state={state}
+                        actions={actions}
+                        {...props}
+                    />
+                )
+            }
+        </PageContextConsumer>
+    )
 }
 
-export { MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING };
+export { MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING, ModalManagerHOC };
 export default ModalManager;

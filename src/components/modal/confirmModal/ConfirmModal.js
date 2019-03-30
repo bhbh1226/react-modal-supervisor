@@ -1,21 +1,63 @@
 import React, { Component, Fragment } from 'react'
 import Modal from '../Modal';
 import PropTypes from 'prop-types';
-import './ConfirmModal.css'
+import styled from 'styled-components';
+import { ConfirmButton, DismissButton } from '../../Button';
+import { Background, flexColumn, flexCenter, flexRow } from '../../Container';
+
+
+const ConfirmModalBackground = styled(Background)``
+
+const ConfirmModalInner = styled.div`
+    ${flexColumn}
+    ${flexCenter}
+
+    position: relative;
+
+    min-width: 30em;
+    min-height: 10em;
+
+    padding: 3em;
+
+    border-radius: 5px;
+    background-color: white;
+
+    input {
+        margin: 3em 0;
+
+        width: 100%;
+
+        outline: none;
+
+        &[type="text"], &[type="password"] {
+            padding: 0.5em;
+
+            border: none;
+            border-bottom: 2px solid rgba(#FF9C00, 0.7);
+        }
+    }
+`
+
+const ModalActionContainer = styled.div`
+    ${flexRow}
+    ${flexCenter}
+
+    box-sizing: border-box;
+`
 
 class ConfirmModal extends Component {
     render() {
         return (
             <Modal>
-                <div className="confirm-modal-background">
-                    <div className="confirm-modal-inner">
+                <ConfirmModalBackground>
+                    <ConfirmModalInner>
                         {this.props.children}
-                        <div className="modal-action-container">
-                            <button className="confirm-button" onClick={this.props.onConfirm}>확인</button>
-                            <button className="dismiss-button" onClick={this.props.onDismiss}>취소</button>
-                        </div>
-                    </div>
-                </div>
+                        <ModalActionContainer>
+                            <ConfirmButton onClick={this.props.onConfirm}>확인</ConfirmButton>
+                            <DismissButton onClick={this.props.onDismiss}>취소</DismissButton>
+                        </ModalActionContainer>
+                    </ConfirmModalInner>
+                </ConfirmModalBackground>
             </Modal>
         )
     }
