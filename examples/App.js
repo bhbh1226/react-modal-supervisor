@@ -1,5 +1,5 @@
 import React from 'react'
-import ModalManager from '../src/ModalSupervisor';
+import ModalSupervisor from '../src/ModalSupervisor';
 import './normalize.css'
 // import Header from './components/Header'
 
@@ -7,9 +7,9 @@ class App extends React.Component {
     render() {
         return (
             <div id="app">
-                <ModalManager>
+                <ModalSupervisor>
                     {this.props.children}
-                </ModalManager>
+                </ModalSupervisor>
             </div>
         )
     }

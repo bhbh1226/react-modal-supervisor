@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { 
-    ModalManagerHOC, 
+    ModalSupervisorHOC, 
     MODAL_TYPE_ALERT, 
     MODAL_TYPE_CONFIRM, 
     MODAL_TYPE_LOADING
@@ -24,4 +24,4 @@ class MainPage extends Component {
     }
 }
 
-export default ModalManagerHOC(MainPage)
+export default ModalSupervisorHOC(MainPage)

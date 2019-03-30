@@ -25,7 +25,7 @@ const modalRootInit = () => {
     document.querySelector('body').appendChild(ModalRoot)
 }
 
-class ModalManager extends Component {
+class ModalSupervisor extends Component {
     constructor(props) {
         super(props)
 
@@ -76,7 +76,7 @@ class ModalManager extends Component {
         const value = { state, actions };
 
         return (
-            <div id="modal-manager">
+            <div id="modal-supervisor">
                 <Provider value={value}>
                     {this.props.children}
                     {
@@ -109,7 +109,7 @@ class ModalManager extends Component {
     }
 }
 
-let ModalManagerHOC = (WrappedComponent) => (props) => {
+let ModalSupervisorHOC = (WrappedComponent) => (props) => {
     return (
         <PageContextConsumer>
             {
@@ -127,6 +127,6 @@ let ModalManagerHOC = (WrappedComponent) => (props) => {
 
 export { 
     MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING,
-    ModalManagerHOC,
+    ModalSupervisorHOC,
     modalRootInit };
-export default ModalManager;
+export default ModalSupervisor;
