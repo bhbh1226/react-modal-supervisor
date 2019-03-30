@@ -4,6 +4,7 @@ import Modal from './modal/Modal';
 import AlertModal from './modal/alertModal/AlertModal';
 import ConfirmModal from './modal/confirmModal/ConfirmModal';
 import LoadingModal from './modal/loadingModal/LoadingModal';
+import PromptModal from './modal/promptModal/PromptModal';
 
 const Context = createContext();
 const { Provider, Consumer: PageContextConsumer } = Context; 
@@ -12,10 +13,12 @@ const { Provider, Consumer: PageContextConsumer } = Context;
 
 /* REQUIRED: type, text */
 const MODAL_TYPE_ALERT = 101
-/* REQUIRED: type, text, onConfirm, onDismiss */
+/* REQUIRED: type, text, confirm, dismiss */
 const MODAL_TYPE_CONFIRM = 102
 /* REQUIRED: type */
 const MODAL_TYPE_LOADING = 103
+/* REQUIRED: type, text, confirm(params), dismiss */
+const MODAL_TYPE_PROMPT = 104
 
 /* INITALIZE */
 
@@ -100,6 +103,13 @@ class ModalSupervisor extends Component {
                                     return (
                                         <LoadingModal key={idx}/>
                                     )
+                                
+                                case MODAL_TYPE_PROMPT:
+                                    return (
+                                        <PromptModal key={idx} onConfirm={(param) => {modal_info.confirm(param); this.actions.closeModalIdx.bind(this)(idx)}} onDismiss={(param) => {modal_info.dismiss(param); this.actions.closeModalIdx.bind(this)(idx)}} >
+                                            <h1>{modal_info.text}</h1>
+                                        </PromptModal>
+                                    )
                             }
                         })
                     }
@@ -126,7 +136,7 @@ let ModalSupervisorHOC = (WrappedComponent) => (props) => {
 }
 
 export { 
-    MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING,
+    MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING, MODAL_TYPE_PROMPT,
     ModalSupervisorHOC,
     modalRootInit };
 export default ModalSupervisor;
