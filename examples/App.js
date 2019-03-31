@@ -1,8 +1,10 @@
 import React from 'react'
-import ModalSupervisor from '../src';
+import ModalSupervisor, { modalRootInit } from '../src';
 
 import './normalize.css'
 // import Header from './components/Header'
+
+modalRootInit()
 
 class App extends React.Component {
     render() {
