@@ -6,6 +6,8 @@ import ConfirmModal from './modal/confirmModal/ConfirmModal';
 import LoadingModal from './modal/loadingModal/LoadingModal';
 import PromptModal from './modal/promptModal/PromptModal';
 
+import PropTypes from 'prop-types'
+
 const Context = createContext();
 const { Provider, Consumer: PageContextConsumer } = Context; 
 
@@ -68,11 +70,11 @@ class ModalSupervisor extends Component {
                 }
             })
         },
-        createModal: (type, text, confirm, dismiss) => {
+        createModal: async (type, text, confirm=(()=>{}), dismiss=(()=>{})) => {
             const modal = { type, text, confirm, dismiss, result: null }
             const newItemIdx = this.state.modals.length
 
-            this.setState((prevState) => {
+            await this.setState((prevState) => {
                 return {
                     ...prevState,
                     modals: [...prevState.modals, modal]
@@ -82,13 +84,22 @@ class ModalSupervisor extends Component {
             // if ((type === MODAL_TYPE_CONFIRM) || (type === MODAL_TYPE_PROMPT)) {
             return new Promise((resolve, reject) => {
                 try {
-                    while (true) {
+                    (function waitForResult() {
                         if (this.state.modals[newItemIdx].result !== null) {
-                            this.closeModalIdx(newItemIdx);
-                            resolve(result)
+                            resolve(this.state.modals[newItemIdx].result)
+
+                            // close modal
+                            this.setState((prevState) => {
+                                return {
+                                    ...prevState,
+                                    modals: prevState.modals.filter((item, i) => newItemIdx !== i) 
+                                }
+                            })
                             return;
                         }
-                    }
+                        setTimeout(waitForResult.bind(this), 30)
+                    }.bind(this))()
+
                 } catch (e) {
                     reject(e)
                     return;
@@ -119,14 +130,14 @@ class ModalSupervisor extends Component {
                             switch(modal_info.type) {
                                 case MODAL_TYPE_ALERT:
                                     return (
-                                        <AlertModal key={idx} onClose={() => {this.actions.closeModalIdx.bind(this)(idx)}}>
+                                        <AlertModal key={idx} onClose={() => {this.actions.setModalResult.bind(this)(idx, true)}}>
                                             <h1>{modal_info.text}</h1>
                                         </AlertModal>
                                     )
 
                                 case MODAL_TYPE_CONFIRM:
                                     return (
-                                        <ConfirmModal key={idx} onConfirm={() => {modal_info.confirm(); this.actions.closeModalIdx.bind(this)(idx)}} onDismiss={() => {modal_info.dismiss(); this.actions.closeModalIdx.bind(this)(idx)}} >
+                                        <ConfirmModal key={idx} onConfirm={() => {modal_info.confirm(); this.actions.setModalResult.bind(this)(idx, true)}} onDismiss={() => {modal_info.dismiss(); this.actions.setModalResult.bind(this)(idx, false)}} >
                                             <h1>{modal_info.text}</h1>
                                         </ConfirmModal>
                                     )
@@ -138,7 +149,7 @@ class ModalSupervisor extends Component {
                                 
                                 case MODAL_TYPE_PROMPT:
                                     return (
-                                        <PromptModal key={idx} onConfirm={(param) => {modal_info.confirm(param); this.actions.closeModalIdx.bind(this)(idx)}} onDismiss={(param) => {modal_info.dismiss(param); this.actions.closeModalIdx.bind(this)(idx)}} >
+                                        <PromptModal key={idx} onConfirm={(param) => {modal_info.confirm(param); this.actions.setModalResult.bind(this)(idx, param)}} onDismiss={(param) => {modal_info.dismiss(param); this.actions.setModalResult.bind(this)(idx, false)}} >
                                             <h1>{modal_info.text}</h1>
                                         </PromptModal>
                                     )
