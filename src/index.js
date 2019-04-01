@@ -6,8 +6,6 @@ import ConfirmModal from './modal/confirmModal/ConfirmModal';
 import LoadingModal from './modal/loadingModal/LoadingModal';
 import PromptModal from './modal/promptModal/PromptModal';
 
-import PropTypes from 'prop-types'
-
 const Context = createContext();
 const { Provider, Consumer: PageContextConsumer } = Context; 
 
