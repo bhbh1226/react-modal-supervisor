@@ -54,8 +54,23 @@ class ModalSupervisor extends Component {
                 }
             })
         },
+        setModalResult: (idx, result) => {
+            let target = this.state.modals[idx]
+            target.result = result
+
+            this.setState((prevState) => {
+                return {
+                    ...prevState,
+                    modals: [
+                        ...prevState.modals.filter((item, i) => idx !== i),
+                        target
+                    ]
+                }
+            })
+        },
         createModal: (type, text, confirm, dismiss) => {
-            const modal = { type, text, confirm, dismiss }
+            const modal = { type, text, confirm, dismiss, result: null }
+            const newItemIdx = this.state.modals.length
 
             this.setState((prevState) => {
                 return {
@@ -63,6 +78,23 @@ class ModalSupervisor extends Component {
                     modals: [...prevState.modals, modal]
                 }
             })
+
+            // if ((type === MODAL_TYPE_CONFIRM) || (type === MODAL_TYPE_PROMPT)) {
+            return new Promise((resolve, reject) => {
+                try {
+                    while (true) {
+                        if (this.state.modals[newItemIdx].result !== null) {
+                            this.closeModalIdx(newItemIdx);
+                            resolve(result)
+                            return;
+                        }
+                    }
+                } catch (e) {
+                    reject(e)
+                    return;
+                }
+            })
+            // }
         },
         addModal: (modal) => {
             this.setState((prevState) => {
