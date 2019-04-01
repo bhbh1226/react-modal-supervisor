@@ -1,7 +1,7 @@
 {
   "name": "react-modal-supervisor",
-  "version": "1.0.31",
-  "description": "react modal supervisor based-on Array!",
+  "version": "1.0.4",
+  "description": "react modal supervisor based-on Array! & promise",
   "keywords": [
     "react",
     "modal",
