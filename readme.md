@@ -1,5 +1,7 @@
 # 	React-Modal-Supervisor
 
+![react-modal-supervisor_version](https://img.shields.io/github/package-json/v/bhbh1226/react-modal-supervisor.svg)
+
 Modal Supervisor Based-on React Context API & JS Array
 
 
@@ -20,6 +22,8 @@ You have to set and initalize Supervising.
 
 ## How To Use
 
+#### Initializing in App.js
+
 ```react
 // import modules
 import ModalSupervisor, { modalRootInit } from 'react-modal-supervisor'
@@ -38,6 +42,10 @@ render() {
 	)
 }
 ```
+
+
+
+#### in Page
 
 And, you can import MODAL_TYPE and modal context consumer HOC
 
@@ -65,6 +73,50 @@ class Mainpage extends Component {
 export default ModalSupervisorHOC(MainPage)
 ```
 
+
+
+#### with callback function
+
+```react
+this.props.actions.createModal(MODAL_TYPE_CONFIRM, "confirm", () => {console.log("onConfirm")}, () => {console.log("onDismiss")})
+this.props.actions.createModal(MODAL_TYPE_PROMPT, "prompt", (param) => {console.log(param + "is typed")}, () => {console.log("onDismiss")})
+```
+
+#### with promise
+
+```react
+this.props.actions.createModal(MODAL_TYPE_CONFIRM, "hello")
+    .then(result => {
+        if (result === true) {
+        	console.log("onConfirm")
+        } else {
+            console.log("onDismiss")
+        }
+	})
+
+this.props.actions.createModal(MODAL_TYPE_PROMPT, "prompt")
+    .then(result => {
+        if (result !== false) {
+        	console.log(result)
+        } else {
+            console.log("onDismiss")
+        }
+	})
+```
+
+#### with async/await
+
+```react
+// you can wait until value will return
+const confirm_result = await this.props.actions.createModal(MODAL_TYPE_CONFIRM, "confirm")
+const prompt_result = await this.props.actions.createModal(MODAL_TYPE_PROMPT, "prompt") 
+
+// you can also use alert with await for waiting result
+const alert_result = await this.props.actions.createModal(MODAL_TYPE_ALERT, "alert")
+```
+
+
+
 ## Documents
 
 ### Modal Context Provider's Actions List
@@ -80,11 +132,12 @@ export default ModalSupervisorHOC(MainPage)
 
 ### MODAL_TYPES
 
-| type name          | required types                                               | Examples                                                     |
-| :----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| MODAL_TYPE_ALERT   | type(String), text(String)                                   | createModal (MODAL_TYPE_ALERT , "Hello" )                    |
-| MODAL_TYPE_CONFIRM | type(String), text(String), confirm(Callback Function), dismiss(Callback Function) | createModal (MODAL_TYPE_CONFIRM , "What do you want" , () =>  {console .log ('It is confirm' )}, () =>  {console .log ('It is dismiss' )}) |
-| MODAL_TYPE_LOADING | type(String)                                                 | createModal (MODAL_TYPE_LOADING )  Please use this .props .actions .popModal () to Close your modal. |
+| type name          | required types                                               | Examples                                                     | Returns                        |
+| :----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------ |
+| MODAL_TYPE_ALERT   | type(String), text(String)                                   | createModal (MODAL_TYPE_ALERT , "Hello" )                    | true                           |
+| MODAL_TYPE_CONFIRM | type(String), text(String), confirm(Callback), dismiss(Callback) | createModal (MODAL_TYPE_CONFIRM , "What do you want")        | (confirm)true, (dismiss)false  |
+| MODAL_TYPE_LOADING | type(String)                                                 | createModal (MODAL_TYPE_LOADING )  Please use this .props .actions .popModal () to Close your modal. |                                |
+| MODAL_TYPE_PROMPT  | type(String), text(String), confirm(param) (Callback), dismiss(Callback) | createModal(MODAL_TYPE_PROMPT, "prompt")                     | (confirm)value, (dismiss)false |
 
 
 
