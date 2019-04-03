@@ -2,10 +2,15 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { ModalBackground as MB, ModalInner as MI, ModalActionContainer as MAC, PromptInputText as PIT } from './Container'
 
-let ModalBackground = MB
-let ModalInner = MI
-let ModalActionContainer = MAC
-let PromptInputText = PIT
+let tMB = null
+let tMI = null
+let tMAC = null
+let tPIT = null
+
+let ModalBackground = ({children}) => { return tMB ? <tMB>{children}</tMB> : <MB>{children}</MB> }
+let ModalInner = ({children}) => { return tMI ? <tMI>{children}</tMI> : <MI>{children}</MI> }
+let ModalActionContainer = ({children}) => { return tMAC ? <tMAC>{children}</tMAC> : <MAC>{children}</MAC> }
+let PromptInputText = ({children}) => { return tPIT ? <tPIT>{children}</tPIT> : <PIT>{children}</PIT> }
 
 /* Constants */
 const STYLE_BACKGROUND = 200
@@ -16,16 +21,16 @@ const STYLE_INPUT_TEXT = 203
 function styleOverride(style, component) {
     switch(style) {
         case STYLE_BACKGROUND:
-            ModalBackground = component || MB
+            tMB = component
             break;
         case STYLE_INNER:
-            ModalInner = component || MI
+            tMI = component
             break;
         case STYLE_ACTION_CONTAINER:
-            ModalActionContainer = component || MAC
+            tMAC = component
             break;
         case STYLE_INPUT_TEXT:
-            PromptInputText = component || PIT               
+            tPIT = component               
             break;
     }
 }
