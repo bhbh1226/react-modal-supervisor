@@ -56,7 +56,7 @@ const ModalBackground = styled(FullScreen)`
 
     background-color: rgba(0,0,0,0.5);
 
-    overflow-y: scroll;
+    overflow-y: auto;
 
     animation: ${fadeInPage} forwards 300ms;
 

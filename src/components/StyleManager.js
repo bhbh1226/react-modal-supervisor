@@ -54,7 +54,7 @@ const StyleManagerHOC = (WrappedComponent) => (props) => {
 }
 
 export { 
-    STYLE_BACKGROUND, STYLE_INNER, STYLE_ACTION_CONTAINER, STYLE_INPUT_TEXT,
+    STYLE_BACKGROUND, STYLE_INNER, STYLE_ACTION_CONTAINER, STYLE_INPUT_TEXT, STYLE_CONFIRM_BUTTON, STYLE_DISMISS_BUTTON, STYLE_CLOSE_BUTTON_ABSOLUTE,
     ModalBackground, ModalInner, ModalActionContainer, PromptInputText, 
     ConfirmButton, DismissButton, CloseButtonAbsolute,
     StyleManagerHOC }
