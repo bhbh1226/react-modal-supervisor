@@ -92,7 +92,7 @@ this.props.actions.createModal(MODAL_TYPE_CONFIRM, "hello")
         } else {
             console.log("onDismiss")
         }
-	})
+})
 
 this.props.actions.createModal(MODAL_TYPE_PROMPT, "prompt")
     .then(result => {
@@ -101,7 +101,7 @@ this.props.actions.createModal(MODAL_TYPE_PROMPT, "prompt")
         } else {
             console.log("onDismiss")
         }
-	})
+})
 ```
 
 #### with async/await
@@ -113,6 +113,67 @@ const prompt_result = await this.props.actions.createModal(MODAL_TYPE_PROMPT, "p
 
 // you can also use alert with await for waiting result
 const alert_result = await this.props.actions.createModal(MODAL_TYPE_ALERT, "alert")
+```
+
+
+
+#### with custom-style modal 
+
+##### in NewCustomStyle.js
+
+```react
+// with new file named 'NewCustomStyle.js'
+import { StyleManager } from 'react-modal-supervisor';
+const { STYLE_BACKGROUND, StyleManagerHOC } = StyleManager
+
+
+const CustomBackground = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(12, 243, 123, 0.4);
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    height: 100vh;
+    width: 100%;
+
+    z-index: 9000;
+`
+
+const NewCustomStyle = StyleManagerHOC(({styleOverride}) => {
+    styleOverride(STYLE_BACKGROUND, CustomBackground)
+
+    return (<Fragment/>)
+})
+
+export default NewCustomStyle
+```
+
+
+
+##### in App.js
+
+```react
+...
+import NewCustomStyle from './NewCustomStyle';
+...
+
+render() {
+    return (
+    	<div id="app">
+            <NewCustomStyle/>
+            <ModalSupervisor>
+                {this.props.children}
+            </ModalSupervisor>
+        </div>
+    )
+}
 ```
 
 
@@ -138,6 +199,19 @@ const alert_result = await this.props.actions.createModal(MODAL_TYPE_ALERT, "ale
 | MODAL_TYPE_CONFIRM | type(String), text(String), confirm(Callback), dismiss(Callback) | createModal (MODAL_TYPE_CONFIRM , "What do you want")        | (confirm)true, (dismiss)false  |
 | MODAL_TYPE_LOADING | type(String)                                                 | createModal (MODAL_TYPE_LOADING )  Please use this .props .actions .popModal () to Close your modal. |                                |
 | MODAL_TYPE_PROMPT  | type(String), text(String), confirm(param) (Callback), dismiss(Callback) | createModal(MODAL_TYPE_PROMPT, "prompt")                     | (confirm)value, (dismiss)false |
+
+### CUSTOM_STYLE_TYPES
+
+| type name                   | descriptions                         | when            |
+| --------------------------- | ------------------------------------ | --------------- |
+| STYLE_BACKGROUND            | background blackout                  | ALL             |
+| STYLE_INNER                 | modal inner white thing (relative)   | ALL             |
+| STYLE_ACTION_CONTAINER      | buttons container                    | CONFIRM, PROMPT |
+| STYLE_INPUT_TEXT            | PromptModal's input                  | PROMPT          |
+| STYLE_CONFIRM_BUTTON        | Confirm Button                       | CONFIRM, PROMPT |
+| STYLE_DISMISS_BUTTON        | Dismiss Button                       | CONFIRM, PROMPT |
+| STYLE_CLOSE_BUTTON_ABSOLUTE | AlertModal's Close Button (absolute) | ALERT           |
+| STYLE_SPINNER               | LoadingModal's Spinner (relative)    | LOADING         |
 
 
 
