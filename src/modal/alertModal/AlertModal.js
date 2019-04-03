@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import Modal from '../Modal';
-import { ModalInner } from '../../components/Container';
+import { ModalInner } from '../../components/StyleManager';
 import { CloseButtonAbsolute } from '../../components/Button';
 
 class AlertModal extends Component {
