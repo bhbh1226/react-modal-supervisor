@@ -5,15 +5,32 @@ import { ModalBackground as MB, ModalInner as MI, ModalActionContainer as MAC, P
 let ModalBackground = MB
 let ModalInner = MI
 let ModalActionContainer = MAC
-let PromptInputText = PI
+let PromptInputText = PIT
 
 /* Constants */
-STYLE_BACKGROUND = 200
-STYLE_INNER = 201
-STYLE_ACTION_CONTAINER = 202
-STYLE_INPUT_TEXT = 203
+const STYLE_BACKGROUND = 200
+const STYLE_INNER = 201
+const STYLE_ACTION_CONTAINER = 202
+const STYLE_INPUT_TEXT = 203
 
-class CustomManager extends Component {
+function styleOverride(style, component) {
+    switch(style) {
+        case STYLE_BACKGROUND:
+            ModalBackground = component || MB
+            break;
+        case STYLE_INNER:
+            ModalInner = component || MI
+            break;
+        case STYLE_ACTION_CONTAINER:
+            ModalActionContainer = component || MAC
+            break;
+        case STYLE_INPUT_TEXT:
+            PromptInputText = component || PIT               
+            break;
+    }
+}
+
+class StyleManager extends Component {
     constructor(props) {
         super(props)
     }
@@ -33,9 +50,14 @@ class CustomManager extends Component {
                 PromptInputText = component || PIT               
                 break;
         }
-
     }
-} 
+}
 
-export { ModalBackground, ModalInner, ModalActionContainer, PromptInputText }
-export default CustomManager
+const StyleManagerHOC = (WrappedComponent) => (props) => {
+    return (
+        <WrappedComponent styleOverride={styleOverride} {...props} />
+    )
+}
+
+export { ModalBackground, ModalInner, ModalActionContainer, PromptInputText, StyleManagerHOC }
+export default StyleManager
