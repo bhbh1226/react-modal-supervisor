@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { STYLE_BACKGROUND, StyleManagerHOC, STYLE_INNER, STYLE_CLOSE_BUTTON_ABSOLUTE } from '../src/components/StyleManager'
+import { StyleManager } from '../src'
+const { STYLE_BACKGROUND, StyleManagerHOC, STYLE_INNER, STYLE_CLOSE_BUTTON_ABSOLUTE } = StyleManager
 
 const CustomBackground = styled.div`
     display: flex;

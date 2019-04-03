@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Modal from '../Modal';
-import LdsSpinner from './LdsSpinner';
+import { Spinner } from '../../components/StyleManager';
 
 class LoadingModal extends Component {
     render() {
         return (
             <Modal>
-                <LdsSpinner/>
+                <Spinner/>
             </Modal>
         )
     }

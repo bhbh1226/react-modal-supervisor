@@ -6,6 +6,8 @@ import ConfirmModal from './modal/confirmModal/ConfirmModal';
 import LoadingModal from './modal/loadingModal/LoadingModal';
 import PromptModal from './modal/promptModal/PromptModal';
 
+import * as StyleManager from './components/StyleManager'
+
 const Context = createContext();
 const { Provider, Consumer: PageContextConsumer } = Context; 
 
@@ -179,5 +181,6 @@ let ModalSupervisorHOC = (WrappedComponent) => (props) => {
 export { 
     MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING, MODAL_TYPE_PROMPT,
     ModalSupervisorHOC,
-    modalRootInit };
+    modalRootInit,
+    StyleManager };
 export default ModalSupervisor;
