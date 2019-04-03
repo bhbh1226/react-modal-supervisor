@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { ModalBackground } from '../components/Container';
+import { ModalBackground } from '../components/StyleManager';
 
 class Modal extends React.Component {
     render() {
