@@ -9,7 +9,13 @@ modalRootInit()
 
 const NewCustomStyle = StyleManagerHOC(({styleOverride}) => {
     styleOverride(STYLE_BACKGROUND, styled.div`
-        background-color: blue;
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+
+        background-color: rgba(12, 243, 123, 0.4);
         position: fixed;
 
         top: 0;
