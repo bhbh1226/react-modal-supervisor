@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import Modal from '../Modal';
-import { ConfirmButton, DismissButton } from '../../components/Button';
-import { ModalInner, ModalActionContainer } from '../../components/StyleManager';
+import { 
+    ModalInner, ModalActionContainer,
+    ConfirmButton, DismissButton
+} from '../../components/StyleManager';
 
 class ConfirmModal extends Component {
     render() {

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import Modal from '../Modal';
-import { ConfirmButton, DismissButton } from '../../components/Button';
-import { ModalInner, ModalActionContainer, PromptInputText } from '../../components/StyleManager';
+import { 
+    ModalInner, ModalActionContainer,
+    ConfirmButton, DismissButton, PromptInputText
+} from '../../components/StyleManager';
 
 class PromptModal extends Component {
     constructor(props) {
