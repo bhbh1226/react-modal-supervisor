@@ -30,29 +30,6 @@ function styleOverride(style, component) {
     }
 }
 
-class StyleManager extends Component {
-    constructor(props) {
-        super(props)
-    }
-
-    styleOverride(style, component) {
-        switch(style) {
-            case STYLE_BACKGROUND:
-                ModalBackground = component || MB
-                break;
-            case STYLE_INNER:
-                ModalInner = component || MI
-                break;
-            case STYLE_ACTION_CONTAINER:
-                ModalActionContainer = component || MAC
-                break;
-            case STYLE_INPUT_TEXT:
-                PromptInputText = component || PIT               
-                break;
-        }
-    }
-}
-
 const StyleManagerHOC = (WrappedComponent) => (props) => {
     return (
         <WrappedComponent styleOverride={styleOverride} {...props} />
@@ -63,4 +40,4 @@ export {
     STYLE_BACKGROUND, STYLE_INNER, STYLE_ACTION_CONTAINER, STYLE_INPUT_TEXT,
     ModalBackground, ModalInner, ModalActionContainer, PromptInputText, 
     StyleManagerHOC }
-export default StyleManager
+// export default StyleManager
