@@ -3,48 +3,48 @@ import styled from 'styled-components'
 import { STYLE_BACKGROUND, StyleManagerHOC, STYLE_INNER, STYLE_CLOSE_BUTTON_ABSOLUTE } from '../src/components/StyleManager'
 
 const CustomBackground = styled.div`
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-justify-content: center;
-align-items: center;
+    justify-content: center;
+    align-items: center;
 
-background-color: rgba(12, 243, 123, 0.4);
-position: fixed;
+    background-color: rgba(12, 243, 123, 0.4);
+    position: fixed;
 
-top: 0;
-left: 0;
+    top: 0;
+    left: 0;
 
-height: 100vh;
-width: 100%;
+    height: 100vh;
+    width: 100%;
 
-z-index: 9000;
+    z-index: 9000;
 `
 
 const CustomInner = styled.div`
-display: flex;
+    display: flex;
 
-position: relative;
+    position: relative;
 
-min-width: 30em;
-min-height: 10em;
+    min-width: 30em;
+    min-height: 10em;
 
-padding: 3em;
+    padding: 3em;
 
-justify-content: center;
-align-items: center;
+    justify-content: center;
+    align-items: center;
 
-border-radius: 5px;
-background-color: green;
+    border-radius: 5px;
+    background-color: green;
 `
 
 const CustomCBTNA = styled.button`
-width: 30px;
-height: 30px;
+    width: 30px;
+    height: 30px;
 
-border: none;
+    border: none;
 
-background-color: white;
+    background-color: white;
 `
 
 const NewCustomStyle = StyleManagerHOC(({styleOverride}) => {
