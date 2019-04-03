@@ -59,5 +59,8 @@ const StyleManagerHOC = (WrappedComponent) => (props) => {
     )
 }
 
-export { ModalBackground, ModalInner, ModalActionContainer, PromptInputText, StyleManagerHOC }
+export { 
+    STYLE_BACKGROUND, STYLE_INNER, STYLE_ACTION_CONTAINER, STYLE_INPUT_TEXT,
+    ModalBackground, ModalInner, ModalActionContainer, PromptInputText, 
+    StyleManagerHOC }
 export default StyleManager
