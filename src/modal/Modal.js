@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import ReactDOM from 'react-dom'
-import { ModalBackground } from '../components/StyleManager';
 
 class Modal extends React.Component {
     render() {
        return ReactDOM.createPortal(
            (
-               <ModalBackground>
+               <Fragment>
                     {this.props.children}
-               </ModalBackground>
+                </Fragment>
            ),
            document.getElementById('modal-root')
        )

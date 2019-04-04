@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import Modal from '../Modal';
-import { Spinner } from '../../components/StyleManager';
+import { Spinner, ModalBackground } from '../../components/StyleManager';
 
 class LoadingModal extends Component {
     render() {
         return (
-            <Modal>
+            <ModalBackground>
                 <Spinner/>
-            </Modal>
+            </ModalBackground>
         )
     }
 }

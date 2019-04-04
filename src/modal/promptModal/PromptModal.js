@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import { 
     ModalInner, ModalActionContainer,
-    ConfirmButton, DismissButton, PromptInputText
+    ConfirmButton, DismissButton, PromptInputText, ModalBackground
 } from '../../components/StyleManager';
 
 class PromptModal extends Component {
@@ -17,7 +17,7 @@ class PromptModal extends Component {
 
     render() {
         return (
-            <Modal>
+            <ModalBackground>
                 <ModalInner>
                     {this.props.children}
                     <PromptInputText type="text" value={this.state.inputValue} onChange={(e) => {this.setState({inputValue: e.target.value})}}/>
@@ -26,7 +26,7 @@ class PromptModal extends Component {
                         <DismissButton onClick={() => {this.props.onDismiss(this.state.inputValue)}}>취소</DismissButton>
                     </ModalActionContainer>
                 </ModalInner>
-            </Modal>
+            </ModalBackground>
         )
     }
 }

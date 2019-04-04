@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import Modal from '../Modal';
 import { 
     ModalInner, ModalActionContainer,
-    ConfirmButton, DismissButton
+    ConfirmButton, DismissButton, ModalBackground
 } from '../../components/StyleManager';
 
 class ConfirmModal extends Component {
     render() {
         return (
-            <Modal>
+            <ModalBackground>
                 <ModalInner>
                     {this.props.children}
                     <ModalActionContainer>
@@ -17,7 +16,7 @@ class ConfirmModal extends Component {
                         <DismissButton onClick={this.props.onDismiss}>취소</DismissButton>
                     </ModalActionContainer>
                 </ModalInner>
-            </Modal>
+            </ModalBackground>
         )
     }
 }
