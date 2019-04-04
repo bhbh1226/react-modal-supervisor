@@ -13,14 +13,21 @@ const { Provider, Consumer: PageContextConsumer } = Context;
 
 /* CONSTANTS */
 
-/* REQUIRED: type, text */
-const MODAL_TYPE_ALERT = 101
-/* REQUIRED: type, text, confirm, dismiss */
-const MODAL_TYPE_CONFIRM = 102
-/* REQUIRED: type */
-const MODAL_TYPE_LOADING = 103
-/* REQUIRED: type, text, confirm(params), dismiss */
-const MODAL_TYPE_PROMPT = 104
+let MODAL_TYPE = [
+    {type: "MODAL_TYPE_ALERT", component: AlertModal},
+    {type: "MODAL_TYPE_CONFIRM", component: ConfirmModal},
+    {type: "MODAL_TYPE_LOADING", component: LoadingModal},
+    {type: "MODAL_TYPE_PROMPT", component: PromptModal},
+]
+
+// /* REQUIRED: type, text */
+// const MODAL_TYPE_ALERT = 101
+// /* REQUIRED: type, text, confirm, dismiss */
+// const MODAL_TYPE_CONFIRM = 102
+// /* REQUIRED: type */
+// const MODAL_TYPE_LOADING = 103
+// /* REQUIRED: type, text, confirm(params), dismiss */
+// const MODAL_TYPE_PROMPT = 104
 
 /* INITALIZE */
 
@@ -41,10 +48,23 @@ class ModalSupervisor extends Component {
 
     actions = {
         popModal: () => {
+            // this.setState((prevState) => {
+            //     return {
+            //         ...prevState,
+            //         modals: [...prevState.modals.pop()] 
+            //     }
+            // })
+
+            let target = this.state.modals[this.state.modals.length-1]
+            target.result = true
+
             this.setState((prevState) => {
                 return {
                     ...prevState,
-                    modals: [...prevState.modals.pop()] 
+                    modals: [
+                        ...prevState.modals.filter((item, i) => (this.state.modals.length-1) !== i),
+                        target
+                    ]
                 }
             })
         },
@@ -107,14 +127,6 @@ class ModalSupervisor extends Component {
             })
             // }
         },
-        addModal: (modal) => {
-            this.setState((prevState) => {
-                return {
-                    ...prevState,
-                    modals: [...prevState.modals, modal]
-                }
-            })
-        }
     }
 
     render() {
@@ -125,37 +137,54 @@ class ModalSupervisor extends Component {
             <div id="modal-supervisor">
                 <Provider value={value}>
                     {this.props.children}
-                    {
-                        this.state.modals.map((modal_info, idx) => {
-                            switch(modal_info.type) {
-                                case MODAL_TYPE_ALERT:
-                                    return (
-                                        <AlertModal key={idx} onClose={() => {this.actions.setModalResult.bind(this)(idx, true)}}>
-                                            <h1>{modal_info.text}</h1>
-                                        </AlertModal>
-                                    )
+                    <Modal>
+                        {
+                            this.state.modals.map((modal_info, idx) => {
+                                switch(modal_info.type) {
+                                    case "MODAL_TYPE_ALERT":
+                                        return (
+                                            <AlertModal key={idx} onClose={() => {this.actions.setModalResult.bind(this)(idx, true)}}>
+                                                <h1>{modal_info.text}</h1>
+                                            </AlertModal>
+                                        )
 
-                                case MODAL_TYPE_CONFIRM:
-                                    return (
-                                        <ConfirmModal key={idx} onConfirm={() => {modal_info.confirm(); this.actions.setModalResult.bind(this)(idx, true)}} onDismiss={() => {modal_info.dismiss(); this.actions.setModalResult.bind(this)(idx, false)}} >
-                                            <h1>{modal_info.text}</h1>
-                                        </ConfirmModal>
-                                    )
-                                
-                                case MODAL_TYPE_LOADING:
-                                    return (
-                                        <LoadingModal key={idx}/>
-                                    )
-                                
-                                case MODAL_TYPE_PROMPT:
-                                    return (
-                                        <PromptModal key={idx} onConfirm={(param) => {modal_info.confirm(param); this.actions.setModalResult.bind(this)(idx, param)}} onDismiss={(param) => {modal_info.dismiss(param); this.actions.setModalResult.bind(this)(idx, false)}} >
-                                            <h1>{modal_info.text}</h1>
-                                        </PromptModal>
-                                    )
-                            }
-                        })
-                    }
+                                    case "MODAL_TYPE_CONFIRM":
+                                        return (
+                                            <ConfirmModal key={idx} onConfirm={() => {modal_info.confirm(); this.actions.setModalResult.bind(this)(idx, true)}} onDismiss={() => {modal_info.dismiss(); this.actions.setModalResult.bind(this)(idx, false)}} >
+                                                <h1>{modal_info.text}</h1>
+                                            </ConfirmModal>
+                                        )
+                                    
+                                    case "MODAL_TYPE_LOADING":
+                                        return (
+                                            <LoadingModal key={idx}/>
+                                        )
+                                    
+                                    case "MODAL_TYPE_PROMPT":
+                                        return (
+                                            <PromptModal key={idx} onConfirm={(param) => {modal_info.confirm(param); this.actions.setModalResult.bind(this)(idx, param)}} onDismiss={(param) => {modal_info.dismiss(param); this.actions.setModalResult.bind(this)(idx, false)}} >
+                                                <h1>{modal_info.text}</h1>
+                                            </PromptModal>
+                                        )
+                                    default:
+                                        for(let modalType of MODAL_TYPE) {
+                                            // console.log(modal_info.type)
+                                            if (modalType.type === modal_info.type) {
+                                                return (
+                                                    <modalType.component
+                                                        key={idx}
+                                                        onConfirm={(param) => {modal_info.confirm(param); this.actions.setModalResult.bind(this)(idx, param)}}
+                                                        onClose={() => {this.actions.setModalResult.bind(this)(idx, true)}}
+                                                        onDismiss={() => {modal_info.dismiss(); this.actions.setModalResult.bind(this)(idx, false)}}>
+                                                        <h1>{modal_info.text}</h1>
+                                                    </modalType.component>
+                                                )
+                                            }
+                                        }
+                                }
+                            })
+                        }
+                    </Modal>
                 </Provider>
             </div>
         )
@@ -178,9 +207,14 @@ let ModalSupervisorHOC = (WrappedComponent) => (props) => {
     )
 }
 
+const addCustomModal = (type, component) => {
+    MODAL_TYPE.push({type, component})
+} 
+
 export { 
-    MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING, MODAL_TYPE_PROMPT,
+    // MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING, MODAL_TYPE_PROMPT,
     ModalSupervisorHOC,
     modalRootInit,
+    addCustomModal,
     StyleManager };
 export default ModalSupervisor;
