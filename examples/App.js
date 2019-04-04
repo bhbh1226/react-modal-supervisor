@@ -1,16 +1,27 @@
 import React, { Fragment } from 'react'
-import ModalSupervisor, { modalRootInit } from '../src';
+import ModalSupervisor, { modalRootInit, addCustomModal } from '../src';
 
 import NewCustomStyle from './NewCustomStyle';
 import './normalize.css'
+import AlertModal from '../src/modal/alertModal/AlertModal';
+
+const NewCustomModal = ({children, onClose}) => {
+    return (
+        <AlertModal onClose={onClose}>
+            {children}
+            <h1>really?</h1>
+        </AlertModal>
+    )
+}
 
 modalRootInit()
+// NewCustomStyle()
+addCustomModal("MODAL_TYPE_WOW", NewCustomModal)
 
 class App extends React.Component {
     render() {
         return (
             <div id="app">
-                {/* <NewCustomStyle/> */}
                 <ModalSupervisor>
                     {this.props.children}
                 </ModalSupervisor>
