@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { StyleManager } from '../src'
-const { STYLE_BACKGROUND, StyleManagerHOC, STYLE_INNER, STYLE_CLOSE_BUTTON_ABSOLUTE } = StyleManager
+import { styleOverride } from '../src/components/StyleManager';
+const { STYLE_BACKGROUND, STYLE_INNER, STYLE_CLOSE_BUTTON_ABSOLUTE } = StyleManager
 
 const CustomBackground = styled.div`
     display: flex;
@@ -48,12 +49,18 @@ const CustomCBTNA = styled.button`
     background-color: white;
 `
 
-const NewCustomStyle = StyleManagerHOC(({styleOverride}) => {
-    // styleOverride(STYLE_BACKGROUND, CustomBackground)
+// const NewCustomStyle = StyleManagerHOC(({styleOverride}) => {
+//     // styleOverride(STYLE_BACKGROUND, CustomBackground)
+//     styleOverride(STYLE_INNER, CustomInner)
+//     styleOverride(STYLE_CLOSE_BUTTON_ABSOLUTE, CustomCBTNA)
+
+//     return (<Fragment/>)
+// })
+
+const NewCustomStyle = () => {
     styleOverride(STYLE_INNER, CustomInner)
     styleOverride(STYLE_CLOSE_BUTTON_ABSOLUTE, CustomCBTNA)
+}
 
-    return (<Fragment/>)
-})
 
 export default NewCustomStyle
