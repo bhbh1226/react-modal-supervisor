@@ -22,6 +22,10 @@ You have to set and initalize Supervising.
 
 ## How To Use
 
+----
+
+### Basic Usage
+
 #### Initializing in App.js
 
 ```react
@@ -73,7 +77,9 @@ class Mainpage extends Component {
 export default ModalSupervisorHOC(MainPage)
 ```
 
+----
 
+### with result
 
 #### with callback function
 
@@ -117,15 +123,16 @@ const alert_result = await this.props.actions.createModal(MODAL_TYPE_ALERT, "ale
 
 
 
-#### with custom-style modal 
+### with custom-style modal
 
-##### in NewCustomStyle.js
+#### in NewCustomStyle.js
 
 ```react
 // with new file named 'NewCustomStyle.js'
 import { StyleManager } from 'react-modal-supervisor';
-const { STYLE_BACKGROUND, StyleManagerHOC } = StyleManager
-
+const { STYLE_BACKGROUND, styleOverride } = StyleManager
+// you should import StyleManager from react-modal-supervisor
+// and you will destructuring STYLE_BACKGROUND enum and styleOverride function.
 
 const CustomBackground = styled.div`
     display: flex;
@@ -146,28 +153,29 @@ const CustomBackground = styled.div`
     z-index: 9000;
 `
 
-const NewCustomStyle = StyleManagerHOC(({styleOverride}) => {
+const NewCustomStyle = () => {
     styleOverride(STYLE_BACKGROUND, CustomBackground)
-
-    return (<Fragment/>)
 })
 
 export default NewCustomStyle
 ```
 
+!!! you **must** use styled-component for new Style.
 
 
-##### in App.js
+
+#### in App.js
 
 ```react
 ...
 import NewCustomStyle from './NewCustomStyle';
+
+NewCustomStyle()
 ...
 
 render() {
     return (
     	<div id="app">
-            <NewCustomStyle/>
             <ModalSupervisor>
                 {this.props.children}
             </ModalSupervisor>
@@ -176,18 +184,59 @@ render() {
 }
 ```
 
+---
+
+### with custom-modal
+
+#### in NewCustomModal.js
+
+```react
+// your modal will receive props like (children, onClose, onConfirm, onDismiss)
+const NewCustomModal = ({children, onClose}) => {
+    return (
+        <div>
+            {children}
+            <h1>really?</h1>
+            <button onClick={onClose}></button>
+        </div>
+    )
+}
+
+export default NewCustomModal
+```
+
+you can use **props** for close modal, confirm modal, dismiss modal.
+
+if you call props.onDismiss(), modal will return false and closed.
+
+if you call props.onConfirm("wow"), modal will return "wow" and closed.
+
+### in App.js
+
+```react
+addCustomModal("MODAL_TYPE_NEW", NewCustomModal)
+
+```
+
+#### and Use in MainPage
+
+```react
+this.props.actions.createModal("MODAL_TYPE_WOW", "안녕")
+```
+
 
 
 ## Documents
 
 ### Modal Context Provider's Actions List
 
-| Name          | Params                       | descriptions            |
-| ------------- | ---------------------------- | ----------------------- |
-| createModal   | type, text, confirm, dismiss | create Modal by params  |
-| addModal      | modal_json                   | create Modal by json    |
-| popModal      |                              | pop pre-floating modal. |
-| closeModalIdx | idx                          | close modal by idx.     |
+| Name           | Params                       | descriptions                         |
+| -------------- | ---------------------------- | ------------------------------------ |
+| createModal    | type, text, confirm, dismiss | create Modal by params               |
+| addCustomModal | type, component              | create Custom Modal                  |
+| popModal       |                              | pop pre-floating modal.              |
+| closeModalIdx  | idx                          | close modal by idx.                  |
+| setModalResult | idx, result                  | set result and close modal which idx |
 
 
 
