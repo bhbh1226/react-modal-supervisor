@@ -48,21 +48,15 @@ class ModalSupervisor extends Component {
 
     actions = {
         popModal: async () => {
-            // this.setState((prevState) => {
-            //     return {
-            //         ...prevState,
-            //         modals: [...prevState.modals.pop()] 
-            //     }
-            // })
-
-            let target = this.state.modals[this.state.modals.length-1]
+            const targetIdx = this.state.modals.length-1
+            let target = this.state.modals[targetIdx]
             target.result = true
 
             await this.setState((prevState) => {
                 return {
                     ...prevState,
                     modals: [
-                        ...prevState.modals.filter((item, i) => (this.state.modals.length-1) !== i),
+                        ...prevState.modals.filter((item, i) => (targetIdx) !== i),
                         target
                     ]
                 }
@@ -92,7 +86,7 @@ class ModalSupervisor extends Component {
         },
         createModal: async (type, text, confirm=(()=>{}), dismiss=(()=>{})) => {
             const modal = { type, text, confirm, dismiss, result: null }
-            const newItemIdx = this.state.modals.length
+            const newItemIdx = ((() => {return this.state.modals.length}).bind(this))()
 
             await this.setState((prevState) => {
                 return {
@@ -105,7 +99,10 @@ class ModalSupervisor extends Component {
             return new Promise((resolve, reject) => {
                 try {
                     (function waitForResult() {
-                        if (this.state.modals[newItemIdx].result !== null) {
+                        if (this.state.modals[newItemIdx] === undefined) {
+                            throw 'modal cannot find newItemIdx error idx : ' + newItemIdx;
+                        }
+                        if (this.state.modals[newItemIdx].result !== null && this.state.modals[newItemIdx].result !== undefined) {
                             resolve(this.state.modals[newItemIdx].result)
 
                             // close modal
