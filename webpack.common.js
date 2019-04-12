@@ -1,14 +1,14 @@
 module.exports = {
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/,
-        query: {
+        options: {
           cacheDirectory: true,
-          presets: ["es2015", "react"],
-          plugins: ["react-hot-loader/babel", "transform-class-properties", "transform-es2015-spread", "transform-object-rest-spread"]
+          presets: ["@babel/preset-env", "@babel/preset-react"],
+          plugins: ["@babel/plugin-transform-runtime", "react-hot-loader/babel", "@babel/plugin-proposal-class-properties"]
         }
       },
       {
@@ -33,9 +33,6 @@ module.exports = {
           },
           {
             loader: "css-loader" // translates CSS into CommonJS
-          },
-          {
-            loader: "sass-loader" // compiles Sass to CSS
           }
         ]
       },

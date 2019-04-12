@@ -47,7 +47,7 @@ class ModalSupervisor extends Component {
     }
 
     actions = {
-        popModal: () => {
+        popModal: async () => {
             // this.setState((prevState) => {
             //     return {
             //         ...prevState,
@@ -58,7 +58,7 @@ class ModalSupervisor extends Component {
             let target = this.state.modals[this.state.modals.length-1]
             target.result = true
 
-            this.setState((prevState) => {
+            await this.setState((prevState) => {
                 return {
                     ...prevState,
                     modals: [

@@ -1,5 +1,5 @@
 {
     "plugins": [
-        "react-hot-loader/babel", "transform-class-properties", "transform-es2015-spread", "transform-object-rest-spread"
+        "@babel/plugin-transform-runtime", "react-hot-loader/babel", "@babel/plugin-proposal-class-properties"
     ]
 }
