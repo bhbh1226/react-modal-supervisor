@@ -95,7 +95,7 @@ class ModalSupervisor extends Component {
                 }
             })
         },
-        createModal: async (type, text, confirm=(()=>{}), dismiss=(()=>{})) => {
+        createModal: async (type, text, props, confirm=(()=>{}), dismiss=(()=>{})) => {
             /* wait for busy */
             await new Promise((resolve, reject) => {
                 try {
@@ -113,7 +113,7 @@ class ModalSupervisor extends Component {
             })
 
             const newItemIdx = this.state.modals.length
-            const modal = { type, text, confirm, dismiss, result: null }
+            const modal = { type, text, confirm, dismiss, result: null, props }
 
             /* modal create */
             await this.setState((prevState) => {
@@ -168,26 +168,26 @@ class ModalSupervisor extends Component {
                                 switch(modal_info.type) {
                                     case "MODAL_TYPE_ALERT":
                                         return (
-                                            <AlertModal key={idx} onClose={() => {this.actions.setModalResult.bind(this)(idx, true)}}>
+                                            <AlertModal key={idx} {...modal_info.props} onClose={() => {this.actions.setModalResult.bind(this)(idx, true)}}>
                                                 <h1>{modal_info.text}</h1>
                                             </AlertModal>
                                         )
 
                                     case "MODAL_TYPE_CONFIRM":
                                         return (
-                                            <ConfirmModal key={idx} onConfirm={() => {modal_info.confirm(); this.actions.setModalResult.bind(this)(idx, true)}} onDismiss={() => {modal_info.dismiss(); this.actions.setModalResult.bind(this)(idx, false)}} >
+                                            <ConfirmModal key={idx} {...modal_info.props} onConfirm={() => {modal_info.confirm(); this.actions.setModalResult.bind(this)(idx, true)}} onDismiss={() => {modal_info.dismiss(); this.actions.setModalResult.bind(this)(idx, false)}} >
                                                 <h1>{modal_info.text}</h1>
                                             </ConfirmModal>
                                         )
                                     
                                     case "MODAL_TYPE_LOADING":
                                         return (
-                                            <LoadingModal key={idx}/>
+                                            <LoadingModal key={idx} {...modal_info.props}/>
                                         )
                                     
                                     case "MODAL_TYPE_PROMPT":
                                         return (
-                                            <PromptModal key={idx} onConfirm={(param) => {modal_info.confirm(param); this.actions.setModalResult.bind(this)(idx, param)}} onDismiss={(param) => {modal_info.dismiss(param); this.actions.setModalResult.bind(this)(idx, false)}} >
+                                            <PromptModal key={idx} {...modal_info.props} onConfirm={(param) => {modal_info.confirm(param); this.actions.setModalResult.bind(this)(idx, param)}} onDismiss={(param) => {modal_info.dismiss(param); this.actions.setModalResult.bind(this)(idx, false)}} >
                                                 <h1>{modal_info.text}</h1>
                                             </PromptModal>
                                         )
@@ -200,7 +200,8 @@ class ModalSupervisor extends Component {
                                                         key={idx}
                                                         onConfirm={(param) => {modal_info.confirm(param); this.actions.setModalResult.bind(this)(idx, param)}}
                                                         onClose={() => {this.actions.setModalResult.bind(this)(idx, true)}}
-                                                        onDismiss={() => {modal_info.dismiss(); this.actions.setModalResult.bind(this)(idx, false)}}>
+                                                        onDismiss={() => {modal_info.dismiss(); this.actions.setModalResult.bind(this)(idx, false)}}
+                                                        {...modal_info.props}>
                                                         <h1>{modal_info.text}</h1>
                                                     </modalType.component>
                                                 )

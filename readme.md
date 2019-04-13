@@ -84,8 +84,8 @@ export default ModalSupervisorHOC(MainPage)
 #### with callback function
 
 ```react
-this.props.actions.createModal(MODAL_TYPE_CONFIRM, "confirm", () => {console.log("onConfirm")}, () => {console.log("onDismiss")})
-this.props.actions.createModal(MODAL_TYPE_PROMPT, "prompt", (param) => {console.log(param + "is typed")}, () => {console.log("onDismiss")})
+this.props.actions.createModal(MODAL_TYPE_CONFIRM, "confirm", {}, () => {console.log("onConfirm")}, () => {console.log("onDismiss")})
+this.props.actions.createModal(MODAL_TYPE_PROMPT, "prompt", {}, (param) => {console.log(param + "is typed")}, () => {console.log("onDismiss")})
 ```
 
 #### with promise
@@ -214,6 +214,7 @@ if you call props.onConfirm("wow"), modal will return "wow" and closed.
 ### in App.js
 
 ```react
+import { addCustomModal } from 'react-modal-supervisor'
 addCustomModal("MODAL_TYPE_NEW", NewCustomModal)
 
 ```
@@ -230,24 +231,24 @@ this.props.actions.createModal("MODAL_TYPE_WOW", "안녕")
 
 ### Modal Context Provider's Actions List
 
-| Name           | Params                       | descriptions                         |
-| -------------- | ---------------------------- | ------------------------------------ |
-| createModal    | type, text, confirm, dismiss | create Modal by params               |
-| addCustomModal | type, component              | create Custom Modal                  |
-| popModal       |                              | pop pre-floating modal.              |
-| closeModalIdx  | idx                          | close modal by idx.                  |
-| setModalResult | idx, result                  | set result and close modal which idx |
+| Name           | Params                              | descriptions                         |
+| -------------- | ----------------------------------- | ------------------------------------ |
+| createModal    | type, text, props, confirm, dismiss | create Modal by params               |
+| addCustomModal | type, component                     | create Custom Modal                  |
+| popModal       |                                     | pop pre-floating modal.              |
+| closeModalIdx  | idx                                 | close modal by idx.                  |
+| setModalResult | idx, result                         | set result and close modal which idx |
 
 
 
 ### MODAL_TYPES
 
-| type name          | required types                                               | Examples                                                     | Returns                        |
-| :----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------ |
-| MODAL_TYPE_ALERT   | type(String), text(String)                                   | createModal (MODAL_TYPE_ALERT , "Hello" )                    | true                           |
-| MODAL_TYPE_CONFIRM | type(String), text(String), confirm(Callback), dismiss(Callback) | createModal (MODAL_TYPE_CONFIRM , "What do you want")        | (confirm)true, (dismiss)false  |
-| MODAL_TYPE_LOADING | type(String)                                                 | createModal (MODAL_TYPE_LOADING )  Please use this .props .actions .popModal () to Close your modal. |                                |
-| MODAL_TYPE_PROMPT  | type(String), text(String), confirm(param) (Callback), dismiss(Callback) | createModal(MODAL_TYPE_PROMPT, "prompt")                     | (confirm)value, (dismiss)false |
+| type name          | required types                                                                          | Examples                                                     | Returns                        |
+| :----------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------ |
+| MODAL_TYPE_ALERT   | type(String), text(String)                                                              | createModal (MODAL_TYPE_ALERT , "Hello" )                    | true                           |
+| MODAL_TYPE_CONFIRM | type(String), text(String), props(object), confirm(Callback), dismiss(Callback)         | createModal (MODAL_TYPE_CONFIRM , "What do you want")        | (confirm)true, (dismiss)false  |
+| MODAL_TYPE_LOADING | type(String)                                                                            | createModal (MODAL_TYPE_LOADING )  Please use this .props .actions .popModal () to Close your modal. |                                |
+| MODAL_TYPE_PROMPT  | type(String), text(String), props(object), confirm(param) (Callback), dismiss(Callback) | createModal(MODAL_TYPE_PROMPT, "prompt")                     | (confirm)value, (dismiss)false |
 
 ### CUSTOM_STYLE_TYPES
 
