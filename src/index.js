@@ -20,15 +20,6 @@ let MODAL_TYPE = [
     {type: "MODAL_TYPE_PROMPT", component: PromptModal},
 ]
 
-// /* REQUIRED: type, text */
-// const MODAL_TYPE_ALERT = 101
-// /* REQUIRED: type, text, confirm, dismiss */
-// const MODAL_TYPE_CONFIRM = 102
-// /* REQUIRED: type */
-// const MODAL_TYPE_LOADING = 103
-// /* REQUIRED: type, text, confirm(params), dismiss */
-// const MODAL_TYPE_PROMPT = 104
-
 /* INITALIZE */
 
 const modalRootInit = () => {
@@ -42,6 +33,7 @@ class ModalSupervisor extends Component {
         super(props)
 
         this.state = {
+            isBusy: false,
             modals: []
         }
     }
@@ -51,6 +43,7 @@ class ModalSupervisor extends Component {
             const targetIdx = this.state.modals.length-1
             let target = this.state.modals[targetIdx]
             let isChanged = false
+            this.setState({isBusy: true})
             target.result = true
 
             this.setState((prevState) => {
@@ -62,7 +55,7 @@ class ModalSupervisor extends Component {
                     ]
                 }
             }, () => {
-                isChanged = true
+                isChanged = this.state.modals
             })
 
             return new Promise((resolve, reject) => {
@@ -89,6 +82,7 @@ class ModalSupervisor extends Component {
         },
         setModalResult: (idx, result) => {
             let target = this.state.modals[idx]
+            this.setState({isBusy: true})
             target.result = result
 
             this.setState((prevState) => {
@@ -102,9 +96,26 @@ class ModalSupervisor extends Component {
             })
         },
         createModal: async (type, text, confirm=(()=>{}), dismiss=(()=>{})) => {
-            const newItemIdx = await ((async () => {return await this.state.modals.length}).bind(this))()
+            /* wait for busy */
+            await new Promise((resolve, reject) => {
+                try {
+                    (function waitForBusy() {
+                        if (this.state.isBusy !== true) {
+                            resolve(this.state.isBusy)
+
+                            return;
+                        }
+                        setTimeout(waitForBusy.bind(this), 30)
+                    }.bind(this))()
+                } catch (e) {
+                    reject(e)
+                }
+            })
+
+            const newItemIdx = this.state.modals.length
             const modal = { type, text, confirm, dismiss, result: null }
 
+            /* modal create */
             await this.setState((prevState) => {
                 return {
                     ...prevState,
@@ -128,7 +139,7 @@ class ModalSupervisor extends Component {
                                     ...prevState,
                                     modals: prevState.modals.filter((item, i) => newItemIdx !== i) 
                                 }
-                            })
+                            }, () => {this.setState({isBusy: false})})
                             return;
                         }
                         setTimeout(waitForResult.bind(this), 30)
