@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import { 
     ModalSupervisorHOC, 
-    // MODAL_TYPE_ALERT, 
-    // MODAL_TYPE_CONFIRM, 
-    // MODAL_TYPE_LOADING,
-    // MODAL_TYPE_PROMPT,
     } from '../../src';
 
 class MainPage extends Component {
@@ -16,12 +12,11 @@ class MainPage extends Component {
         return (
             <div id="main-page">
                 <button onClick={async () => {console.log(await this.props.actions.createModal("MODAL_TYPE_WOW", "안녕"))}}>Open Modal</button>
-                {/* <button onClick={() => {this.props.actions.createModal("MODAL_TYPE_CONFIRM", "정말?", () => {console.log('wow')}, () => {console.log('hello')})}}>Confirm Modal</button> */}
                 <button onClick={async () => {console.log(await this.props.actions.createModal("MODAL_TYPE_CONFIRM", "정말?"))}}>Confir asm Modal</button>
-                {/* <button onClick={() => {this.props.actions.createModal("MODAL_TYPE_PROMPT", "프롬프트?", (param) => {console.log(param)}, () => {console.log('hello')})}}>Prompt Modal</button> */}
                 <button onClick={async () => {console.log(await this.props.actions.createModal("MODAL_TYPE_PROMPT", "프롬프트?"))}}>Prompt asd Modal</button>
-                <button onClick={() => {this.props.actions.createModal("MODAL_TYPE_LOADING"); setTimeout(() => {
-                    this.props.actions.popModal()
+                <button onClick={() => {this.props.actions.createModal("MODAL_TYPE_LOADING"); setTimeout(async () => {
+                    console.log(await this.props.actions.popModal())
+                    console.log('wow')
                 }, 2000);}}>Loading Modal</button>
             </div>
         )

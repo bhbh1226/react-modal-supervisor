@@ -50,15 +50,32 @@ class ModalSupervisor extends Component {
         popModal: async () => {
             const targetIdx = this.state.modals.length-1
             let target = this.state.modals[targetIdx]
+            let isChanged = false
             target.result = true
 
-            await this.setState((prevState) => {
+            this.setState((prevState) => {
                 return {
                     ...prevState,
                     modals: [
                         ...prevState.modals.filter((item, i) => (targetIdx) !== i),
                         target
                     ]
+                }
+            }, () => {
+                isChanged = true
+            })
+
+            return new Promise((resolve, reject) => {
+                try {
+                    /* for await */
+                    (function checkForResult() {
+                        if (isChanged !== false) {
+                            resolve(isChanged)
+                        }
+                        setTimeout(checkForResult.bind(this), 30)
+                    }.bind(this))()
+                } catch (e) {
+                    reject(e)
                 }
             })
         },
@@ -86,8 +103,7 @@ class ModalSupervisor extends Component {
         },
         createModal: async (type, text, confirm=(()=>{}), dismiss=(()=>{})) => {
             const newItemIdx = await ((async () => {return await this.state.modals.length}).bind(this))()
-            const modal = { type, text, confirm, dismiss, result: null, newItemIdx: newItemIdx }
-            console.log(newItemIdx)
+            const modal = { type, text, confirm, dismiss, result: null }
 
             await this.setState((prevState) => {
                 return {
