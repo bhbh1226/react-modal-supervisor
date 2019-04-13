@@ -85,8 +85,9 @@ class ModalSupervisor extends Component {
             })
         },
         createModal: async (type, text, confirm=(()=>{}), dismiss=(()=>{})) => {
-            const modal = { type, text, confirm, dismiss, result: null }
-            const newItemIdx = ((() => {return this.state.modals.length}).bind(this))()
+            const newItemIdx = await ((async () => {return await this.state.modals.length}).bind(this))()
+            const modal = { type, text, confirm, dismiss, result: null, newItemIdx: newItemIdx }
+            console.log(newItemIdx)
 
             await this.setState((prevState) => {
                 return {
