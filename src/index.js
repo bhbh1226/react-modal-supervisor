@@ -115,6 +115,13 @@ class ModalSupervisor extends Component {
             const newItemIdx = this.state.modals.length
             const modal = { type, text, confirm, dismiss, result: null, props }
 
+            /* validation check */
+            if (!MODAL_TYPE.includes(type)) {
+                return new Promise((resolve, reject) => {
+                    reject({ status: 'fail', type: 'ModalTypeInvalidError', message: 'MOTAL_TYPE is invalid'})
+                })
+            }
+
             /* modal create */
             await this.setState((prevState) => {
                 return {
@@ -123,7 +130,6 @@ class ModalSupervisor extends Component {
                 }
             })
 
-            // if ((type === MODAL_TYPE_CONFIRM) || (type === MODAL_TYPE_PROMPT)) {
             return new Promise((resolve, reject) => {
                 try {
                     (function waitForResult() {
@@ -223,8 +229,8 @@ let ModalSupervisorHOC = (WrappedComponent) => (props) => {
             {
                 ({ state, actions }) => (
                     <WrappedComponent
-                        state={state}
-                        actions={actions}
+                        modalState={state}
+                        modalActions={actions}
                         {...props}
                     />
                 )
