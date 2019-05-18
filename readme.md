@@ -66,9 +66,9 @@ class Mainpage extends Component {
         return (
             {// when click buttons}
             <button onClick={() => {
-				// you can use *this.props.actions.createModal function to create modal*
+				// you can use *this.props.modalActions.createModal function to create modal*
                 // provider's createModal with "MODAL_TYPE_ALERT"
-                this.props.actions.createModal("MODAL_TYPE_ALERT", "Hello, World!")}}>Open Modal</button>
+                this.props.modalActions.createModal("MODAL_TYPE_ALERT", "Hello, World!")}}>Open Modal</button>
         )
     }
 }
@@ -83,14 +83,14 @@ export default ModalSupervisorHOC(MainPage)
 #### with callback function
 
 ```react
-this.props.actions.createModal("MODAL_TYPE_CONFIRM", "confirm", {}, () => {console.log("onConfirm")}, () => {console.log("onDismiss")})
-this.props.actions.createModal("MODAL_TYPE_PROMPT", "prompt", {}, (param) => {console.log(param + "is typed")}, () => {console.log("onDismiss")})
+this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", "confirm", {}, () => {console.log("onConfirm")}, () => {console.log("onDismiss")})
+this.props.modalActions.createModal("MODAL_TYPE_PROMPT", "prompt", {}, (param) => {console.log(param + "is typed")}, () => {console.log("onDismiss")})
 ```
 
 #### with promise
 
 ```react
-this.props.actions.createModal("MODAL_TYPE_CONFIRM", "hello")
+this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", "hello")
     .then(result => {
         if (result === true) {
         	console.log("onConfirm")
@@ -99,7 +99,7 @@ this.props.actions.createModal("MODAL_TYPE_CONFIRM", "hello")
         }
 })
 
-this.props.actions.createModal("MODAL_TYPE_PROMPT", "prompt")
+this.props.modalActions.createModal("MODAL_TYPE_PROMPT", "prompt")
     .then(result => {
         if (result !== false) {
         	console.log(result)
@@ -113,11 +113,11 @@ this.props.actions.createModal("MODAL_TYPE_PROMPT", "prompt")
 
 ```react
 // you can wait until value will return
-const confirm_result = await this.props.actions.createModal("MODAL_TYPE_CONFIRM", "confirm")
-const prompt_result = await this.props.actions.createModal("MODAL_TYPE_PROMPT", "prompt") 
+const confirm_result = await this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", "confirm")
+const prompt_result = await this.props.modalActions.createModal("MODAL_TYPE_PROMPT", "prompt") 
 
 // you can also use alert with await for waiting result
-const alert_result = await this.props.actions.createModal("MODAL_TYPE_ALERT", "alert")
+const alert_result = await this.props.modalActions.createModal("MODAL_TYPE_ALERT", "alert")
 ```
 
 
@@ -221,7 +221,7 @@ addCustomModal("MODAL_TYPE_NEW", NewCustomModal)
 #### and Use in MainPage
 
 ```react
-this.props.actions.createModal("MODAL_TYPE_WOW", "안녕")
+this.props.modalActions.createModal("MODAL_TYPE_WOW", "안녕")
 ```
 
 
@@ -246,7 +246,7 @@ this.props.actions.createModal("MODAL_TYPE_WOW", "안녕")
 | :----------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------ |
 | MODAL_TYPE_ALERT   | type(String), text(String)                                                              | createModal (MODAL_TYPE_ALERT , "Hello" )                    | true                           |
 | MODAL_TYPE_CONFIRM | type(String), text(String), props(object), confirm(Callback), dismiss(Callback)         | createModal (MODAL_TYPE_CONFIRM , "What do you want")        | (confirm)true, (dismiss)false  |
-| MODAL_TYPE_LOADING | type(String)                                                                            | createModal (MODAL_TYPE_LOADING )  Please use this .props .actions .popModal () to Close your modal. |                                |
+| MODAL_TYPE_LOADING | type(String)                                                                            | createModal (MODAL_TYPE_LOADING )  Please use this .props .modalActions .popModal () to Close your modal. |                                |
 | MODAL_TYPE_PROMPT  | type(String), text(String), props(object), confirm(param) (Callback), dismiss(Callback) | createModal(MODAL_TYPE_PROMPT, "prompt")                     | (confirm)value, (dismiss)false |
 
 ### CUSTOM_STYLE_TYPES
