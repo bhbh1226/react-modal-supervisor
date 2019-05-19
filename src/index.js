@@ -116,7 +116,7 @@ class ModalSupervisor extends Component {
             const modal = { type, text, confirm, dismiss, result: null, props }
 
             /* validation check */
-            if (!MODAL_TYPE.includes(type)) {
+            if (!(MODAL_TYPE.map(item => item.type).includes(type))) {
                 return new Promise((resolve, reject) => {
                     reject({ status: 'fail', type: 'ModalTypeInvalidError', message: 'MOTAL_TYPE is invalid'})
                 })
