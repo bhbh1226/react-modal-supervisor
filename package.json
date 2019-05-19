@@ -1,6 +1,6 @@
 {
   "name": "react-modal-supervisor",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "react modal supervisor based-on Array! & promise",
   "keywords": [
     "react",
@@ -28,22 +28,19 @@
     "node-server": "node .\\server.js",
     "nodemon": "nodemon .\\server.js localhost 8001"
   },
-  "dependencies": {
-    "@babel/runtime": "^7.4.3",
-    "prop-types": "^15.7.2",
-    "styled-components": "^4.2.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.3",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
     "file-loader": "^1.1.11",
     "install": "^0.12.2",
     "npm": "^6.9.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.3",
@@ -51,6 +48,7 @@
     "react-router-dom": "^4.3.1",
     "redirect-https": "^1.3.0",
     "style-loader": "^0.21.0",
+    "styled-components": "^4.2.0",
     "uglifyjs-webpack-plugin": "^1.3.0",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
