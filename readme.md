@@ -2,6 +2,8 @@
 
 ![react-modal-supervisor_version](https://img.shields.io/npm/v/react-modal-supervisor.svg)
 
+![LICENSE](https://img.shields.io/npm/l/react-modal-supervisor.svg)
+
 Modal Supervisor Based-on React Context API & JS Array
 
 
