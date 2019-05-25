@@ -1,6 +1,6 @@
 {
   "name": "react-modal-supervisor",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "react modal supervisor based-on Array! & promise",
   "keywords": [
     "react",
@@ -56,5 +56,5 @@
     "webpack-merge": "^4.2.1"
   },
   "author": "bhbh1226",
-  "license": "ISC"
+  "license": "MIT"
 }
