@@ -2,20 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Button = styled.button`
-    min-width: 40%;
-    min-height: 3em;
-
-    margin: 0 1em;
-    
+    padding: 0.6em 1em;
     border: none;
-    border-radius: 5px;
-    border-bottom: 3px solid rgba(174, 174, 174, 0.9);
+    border-radius: 2px;
     background-color: rgba(174, 174, 174, 0.65);
     color: white;
 
     outline: none;
 
     transition: 100ms;
+
+    cursor: pointer;
 
     &::-moz-focus-inner { 
         border: 0;
@@ -32,14 +29,11 @@ const Button = styled.button`
     }
 
     &:active {
-        margin-top: 3px;
         background-color: rgba(174, 174, 174, 1);
-        border-bottom: 0px solid rgba(174, 174, 174, 0.9);
     }
 `
 
 const ConfirmButton = styled(Button)`
-    border-bottom: 3px solid rgba(7, 194, 100, 0.9);
     background-color: rgba(7, 194, 100, 0.65);
 
     &:hover {
@@ -47,24 +41,23 @@ const ConfirmButton = styled(Button)`
     }
 
     &:active {
-        margin-top: 3px;
         background-color: rgba(7, 194, 100, 1);
-        border-bottom: 0px solid rgba(7, 194, 100, 0.9);
     }
 `
 
 const DismissButton = styled(Button)`
-    border-bottom: 3px solid rgba(207, 68, 13, 0.9);
-    background-color: rgba(207, 68, 13, 0.65);
+    color: rgba(207, 68, 13, 0.65);
+    background-color: rgba(0, 0, 0, 0);
+    
     
     &:hover {
-        background-color: rgba(207, 68, 13, 0.7);
+        color: rgba(207, 68, 13, 0.7);
+        background-color: rgba(0, 0, 0, 0.1);
     }
 
     &:active {
-        margin-top: 3px;
-        background-color: rgba(207, 68, 13, 1);
-        border-bottom: 0px solid rgba(207, 68, 13, 0.9);
+        color: rgba(207, 68, 13, 1);
+        background-color: rgba(0, 0, 0, 0.2);
     }
 `
 
@@ -72,9 +65,6 @@ const CloseButton = styled(Button)`
     min-width: 24px;
     min-height: 24px;
 
-    border: none;
-    border-radius: 5px;
-    border-bottom: 3px solid rgba(200, 15, 15, .9);
     background-color: rgba(200, 15, 15, .65);
     color: white;
 
@@ -94,12 +84,14 @@ const CloseButton = styled(Button)`
     }
 `
 
-const CloseButtonAbsolute = styled(CloseButton)`
-    position: absolute;
+// const CloseButtonAbsolute = styled(CloseButton)`
+//     position: absolute;
             
-    top: 10px;
-    right: 10px;
-`
+//     bottom: 10px;
+//     right: 10px;
 
-export { ConfirmButton, DismissButton, CloseButton, CloseButtonAbsolute }
+//     color: white;
+// `
+
+export { ConfirmButton, DismissButton, CloseButton }
 export default Button

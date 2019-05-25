@@ -10,10 +10,19 @@ class ConfirmModal extends Component {
         return (
             <ModalBackground>
                 <ModalInner>
-                    {this.props.children}
+                    {
+                        this.props.text.title && (
+                            <h1>{this.props.text.title}</h1>
+                        )
+                    }
+                    {
+                        this.props.text.content && (
+                            <p>{this.props.text.content}</p>
+                        )
+                    }
                     <ModalActionContainer>
-                        <ConfirmButton onClick={this.props.onConfirm}>확인</ConfirmButton>
-                        <DismissButton onClick={this.props.onDismiss}>취소</DismissButton>
+                        <DismissButton onClick={this.props.onDismiss}>Dismiss</DismissButton>
+                        <ConfirmButton onClick={this.props.onConfirm}>Confirm</ConfirmButton>
                     </ModalActionContainer>
                 </ModalInner>
             </ModalBackground>

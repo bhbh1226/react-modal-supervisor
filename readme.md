@@ -1,8 +1,12 @@
 # 	React-Modal-Supervisor
 
-![react-modal-supervisor_version](https://img.shields.io/github/package-json/v/bhbh1226/react-modal-supervisor.svg)
+![react-modal-supervisor_version](https://img.shields.io/npm/v/react-modal-supervisor.svg)
 
 Modal Supervisor Based-on React Context API & JS Array
+
+
+
+![Preview Image](D:\Coding\SmallProject\ModalSupervisor\preview.gif)
 
 
 
@@ -20,13 +24,15 @@ You have to set and initalize Supervising.
 
 
 
-## How To Use
+## Useage
 
 ----
 
 ### Basic Usage
 
 #### Initializing in App.js
+
+Since ModalSupervisor based on Context API's Provider, It should be placed on root.
 
 ```react
 // import modules
@@ -68,7 +74,8 @@ class Mainpage extends Component {
             <button onClick={() => {
 				// you can use *this.props.modalActions.createModal function to create modal*
                 // provider's createModal with "MODAL_TYPE_ALERT"
-                this.props.modalActions.createModal("MODAL_TYPE_ALERT", "Hello, World!")}}>Open Modal</button>
+                // createModal's props is (modal_type, texts, options)
+                this.props.modalActions.createModal("MODAL_TYPE_ALERT", {title: "Hello, World!", content: "Hello World1!!!!1!"})}}>Open Modal</button>
         )
     }
 }
@@ -83,14 +90,14 @@ export default ModalSupervisorHOC(MainPage)
 #### with callback function
 
 ```react
-this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", "confirm", {}, () => {console.log("onConfirm")}, () => {console.log("onDismiss")})
-this.props.modalActions.createModal("MODAL_TYPE_PROMPT", "prompt", {}, (param) => {console.log(param + "is typed")}, () => {console.log("onDismiss")})
+this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", {title: "Hello, World!", content: "Hello World1!!!!1!"}, {}, () => {console.log("onConfirm")}, () => {console.log("onDismiss")})
+this.props.modalActions.createModal("MODAL_TYPE_PROMPT", {title: "Hello, World!", content: "Hello World1!!!!1!"}, {}, (param) => {console.log(param + "is typed")}, () => {console.log("onDismiss")})
 ```
 
 #### with promise
 
 ```react
-this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", "hello")
+this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", {title: "Hello, World!", content: "Hello World1!!!!1!"})
     .then(result => {
         if (result === true) {
         	console.log("onConfirm")
@@ -99,7 +106,7 @@ this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", "hello")
         }
 })
 
-this.props.modalActions.createModal("MODAL_TYPE_PROMPT", "prompt")
+this.props.modalActions.createModal("MODAL_TYPE_PROMPT", {title: "Hello, World!", content: "Hello World1!!!!1!"})
     .then(result => {
         if (result !== false) {
         	console.log(result)
@@ -113,11 +120,11 @@ this.props.modalActions.createModal("MODAL_TYPE_PROMPT", "prompt")
 
 ```react
 // you can wait until value will return
-const confirm_result = await this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", "confirm")
-const prompt_result = await this.props.modalActions.createModal("MODAL_TYPE_PROMPT", "prompt") 
+const confirm_result = await this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", {title: "Hello, World!", content: "Hello World1!!!!1!"})
+const prompt_result = await this.props.modalActions.createModal("MODAL_TYPE_PROMPT", {title: "Hello, World!", content: "Hello World1!!!!1!"}) 
 
 // you can also use alert with await for waiting result
-const alert_result = await this.props.modalActions.createModal("MODAL_TYPE_ALERT", "alert")
+const alert_result = await this.props.modalActions.createModal("MODAL_TYPE_ALERT", {title: "Hello, World!", content: "Hello World1!!!!1!"})
 ```
 
 
@@ -242,12 +249,12 @@ this.props.modalActions.createModal("MODAL_TYPE_WOW", "안녕")
 
 ### MODAL_TYPES
 
-| type name          | required types                                                                          | Examples                                                     | Returns                        |
-| :----------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------ |
-| MODAL_TYPE_ALERT   | type(String), text(String)                                                              | createModal (MODAL_TYPE_ALERT , "Hello" )                    | true                           |
-| MODAL_TYPE_CONFIRM | type(String), text(String), props(object), confirm(Callback), dismiss(Callback)         | createModal (MODAL_TYPE_CONFIRM , "What do you want")        | (confirm)true, (dismiss)false  |
-| MODAL_TYPE_LOADING | type(String)                                                                            | createModal (MODAL_TYPE_LOADING )  Please use this .props .modalActions .popModal () to Close your modal. |                                |
-| MODAL_TYPE_PROMPT  | type(String), text(String), props(object), confirm(param) (Callback), dismiss(Callback) | createModal(MODAL_TYPE_PROMPT, "prompt")                     | (confirm)value, (dismiss)false |
+| type name          | required types                                               | Examples                                                     | Returns                        |
+| :----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------ |
+| MODAL_TYPE_ALERT   | type(String), text(JSON)                                     | createModal (MODAL_TYPE_ALERT , "Hello" )                    | true                           |
+| MODAL_TYPE_CONFIRM | type(String), text(JSON), props(object), confirm(Callback), dismiss(Callback) | createModal (MODAL_TYPE_CONFIRM , "What do you want")        | (confirm)true, (dismiss)false  |
+| MODAL_TYPE_LOADING | type(String)                                                 | createModal (MODAL_TYPE_LOADING )  Please use this .props .modalActions .popModal () to Close your modal. |                                |
+| MODAL_TYPE_PROMPT  | type(String), text(JSON), props(object), confirm(param) (Callback), dismiss(Callback) | createModal(MODAL_TYPE_PROMPT, "prompt")                     | (confirm)value, (dismiss)false |
 
 ### CUSTOM_STYLE_TYPES
 
@@ -261,6 +268,14 @@ this.props.modalActions.createModal("MODAL_TYPE_WOW", "안녕")
 | STYLE_DISMISS_BUTTON        | Dismiss Button                       | CONFIRM, PROMPT |
 | STYLE_CLOSE_BUTTON_ABSOLUTE | AlertModal's Close Button (absolute) | ALERT           |
 | STYLE_SPINNER               | LoadingModal's Spinner (relative)    | LOADING         |
+
+### Texts JSON type
+
+| name        | type   | descriptions                   |
+| ----------- | ------ | ------------------------------ |
+| title       | String | Title wrapped by h1 tag        |
+| content     | String | inner Content wrapped by p tag |
+| placeholder | String | prompt modal's placeholdera    |
 
 
 

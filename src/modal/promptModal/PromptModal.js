@@ -19,11 +19,20 @@ class PromptModal extends Component {
         return (
             <ModalBackground>
                 <ModalInner>
-                    {this.props.children}
-                    <PromptInputText type="text" value={this.state.inputValue} onChange={(e) => {this.setState({inputValue: e.target.value})}}/>
+                    {
+                        this.props.text.title && (
+                            <h1>{this.props.text.title}</h1>
+                        )
+                    }
+                    {
+                        this.props.text.content && (
+                            <p>{this.props.text.content}</p>
+                        )
+                    }
+                    <PromptInputText type="text" value={this.state.inputValue} placeholder={this.props.text.placeholder || "Please Write Anything"} onChange={(e) => {this.setState({inputValue: e.target.value})}}/>
                     <ModalActionContainer>
-                        <ConfirmButton onClick={() => {this.props.onConfirm(this.state.inputValue)}}>확인</ConfirmButton>
-                        <DismissButton onClick={() => {this.props.onDismiss(this.state.inputValue)}}>취소</DismissButton>
+                        <DismissButton onClick={() => {this.props.onDismiss(this.state.inputValue)}}>Dismiss</DismissButton>
+                        <ConfirmButton onClick={() => {this.props.onConfirm(this.state.inputValue)}}>Confirm</ConfirmButton>
                     </ModalActionContainer>
                 </ModalInner>
             </ModalBackground>

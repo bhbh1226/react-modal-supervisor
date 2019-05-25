@@ -54,7 +54,7 @@ const ModalBackground = styled(FullScreen)`
     ${flexColumn}
     ${flexCenter}
 
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.1);
 
     overflow-y: auto;
 
@@ -66,21 +66,34 @@ const ModalBackground = styled(FullScreen)`
 `
 
 const ModalInner = styled.div`
+    @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR');
+
     ${flexColumn}
     ${flexCenter}
 
+    font-family: 'Noto Sans KR', sans-serif;
+
     position: relative;
 
-    min-width: 30em;
+    min-width: 22em;
+    max-width: 28em;
     min-height: 10em;
 
     padding: 3em;
+    padding-bottom: 4em;
 
     border-radius: 5px;
     background-color: white;
+
+    box-shadow: 15px 19px 32px -18px rgba(21,19,19,.07);
 `
 
 const ModalActionContainer = styled.div`
+    position: absolute;
+    
+    bottom: 20px;
+    right: 20px;
+
     ${flexRow}
     ${flexCenter}
 
@@ -90,18 +103,20 @@ const ModalActionContainer = styled.div`
 const PromptInputText = styled.input`
     width: 100%;
 
-    margin: 3em 0;
+    margin: 1em 0;
     padding: 0.5em;
     padding-top: 0.6em;
 
     border: none;
-    border-bottom: 2px solid rgba(255, 156, 0, 0.7);
-    border-top-right-radius: 1em;
-    border-top-left-radius: 1em;
+    border-bottom: 3px solid black;
 
-    background-color: rgba(0, 0, 0, 0.1);
+    /* background-color: rgba(0, 0, 0, 0.01); */
 
     outline: none;
+
+    /* &::placeholder {
+        color: white;
+    } */
 `
 
 export { 
