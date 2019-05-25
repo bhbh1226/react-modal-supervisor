@@ -6,7 +6,7 @@ Modal Supervisor Based-on React Context API & JS Array
 
 
 
-![Preview Image](D:\Coding\SmallProject\ModalSupervisor\preview.gif)
+![Preview Image](https://user-images.githubusercontent.com/27873685/58368580-0f168980-7f2a-11e9-8a78-231dbac0d429.gif)
 
 
 
