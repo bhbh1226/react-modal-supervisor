@@ -34,7 +34,7 @@ You have to set and initalize Supervising.
 
 Since ModalSupervisor based on Context API's Provider, It should be placed on root.
 
-```react
+```javascript
 // import modules
 import ModalSupervisor, { modalRootInit } from 'react-modal-supervisor'
 
@@ -59,7 +59,7 @@ render() {
 
 And, you can import MODAL_TYPE and modal context consumer HOC
 
-```react
+```javascript
 // import modules
 import {
     ModalSupervisorHOC
@@ -89,14 +89,14 @@ export default ModalSupervisorHOC(MainPage)
 
 #### with callback function
 
-```react
+```javascript
 this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", {title: "Hello, World!", content: "Hello World1!!!!1!"}, {}, () => {console.log("onConfirm")}, () => {console.log("onDismiss")})
 this.props.modalActions.createModal("MODAL_TYPE_PROMPT", {title: "Hello, World!", content: "Hello World1!!!!1!"}, {}, (param) => {console.log(param + "is typed")}, () => {console.log("onDismiss")})
 ```
 
 #### with promise
 
-```react
+```javascript
 this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", {title: "Hello, World!", content: "Hello World1!!!!1!"})
     .then(result => {
         if (result === true) {
@@ -118,7 +118,7 @@ this.props.modalActions.createModal("MODAL_TYPE_PROMPT", {title: "Hello, World!"
 
 #### with async/await
 
-```react
+```javascript
 // you can wait until value will return
 const confirm_result = await this.props.modalActions.createModal("MODAL_TYPE_CONFIRM", {title: "Hello, World!", content: "Hello World1!!!!1!"})
 const prompt_result = await this.props.modalActions.createModal("MODAL_TYPE_PROMPT", {title: "Hello, World!", content: "Hello World1!!!!1!"}) 
@@ -133,7 +133,7 @@ const alert_result = await this.props.modalActions.createModal("MODAL_TYPE_ALERT
 
 #### in NewCustomStyle.js
 
-```react
+```javascript
 // with new file named 'NewCustomStyle.js'
 import { StyleManager } from 'react-modal-supervisor';
 const { STYLE_BACKGROUND, styleOverride } = StyleManager
@@ -172,7 +172,7 @@ export default NewCustomStyle
 
 #### in App.js
 
-```react
+```javascript
 ...
 import NewCustomStyle from './NewCustomStyle';
 
@@ -196,7 +196,7 @@ render() {
 
 #### in NewCustomModal.js
 
-```react
+```javascript
 // your modal will receive props like (children, onClose, onConfirm, onDismiss)
 const NewCustomModal = ({children, onClose}) => {
     return (
@@ -219,7 +219,7 @@ if you call props.onConfirm("wow"), modal will return "wow" and closed.
 
 ### in App.js
 
-```react
+```javascript
 import { addCustomModal } from 'react-modal-supervisor'
 addCustomModal("MODAL_TYPE_NEW", NewCustomModal)
 
@@ -227,7 +227,7 @@ addCustomModal("MODAL_TYPE_NEW", NewCustomModal)
 
 #### and Use in MainPage
 
-```react
+```javascript
 this.props.modalActions.createModal("MODAL_TYPE_WOW", "안녕")
 ```
 
