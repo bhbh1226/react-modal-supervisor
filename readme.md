@@ -63,9 +63,17 @@
 
 ## Demo
 
-<iframe src="https://codesandbox.io/embed/competent-elgamal-pd6d5?fontsize=14" title="react-modal-supervisor demo" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
-
 [![Edit react-modal-supervisor demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/competent-elgamal-pd6d5?fontsize=14)
+
+or
+
+```bash
+$ git clone https://github.com/bhbh1226/react-modal-supervisor.git
+$ cd react-modal-supervisor
+$ yarn run dev-server
+```
+
+
 
 ## Installation
 
