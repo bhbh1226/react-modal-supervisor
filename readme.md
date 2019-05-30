@@ -10,7 +10,7 @@
 
 
 
-- Demo
+- [Demo](#demo)
 
 - [Installation](#installation)
 
