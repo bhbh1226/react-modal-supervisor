@@ -61,6 +61,12 @@
 
 
 
+## Demo
+
+<iframe src="https://codesandbox.io/embed/competent-elgamal-pd6d5?fontsize=14" title="react-modal-supervisor demo" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+[![Edit react-modal-supervisor demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/competent-elgamal-pd6d5?fontsize=14)
+
 ## Installation
 
 Using npm:
@@ -328,11 +334,32 @@ in NewCustomModal.js
 // your modal will receive props like (children, onClose, onConfirm, onDismiss)
 const NewCustomModal = ({children, onClose}) => {
     return (
-        <div>
-            {children}
-            <h1>really?</h1>
-            <button onClick={onClose}></button>
-        </div>
+        <div
+      		style={{
+       			position: "fixed",
+        		top: 0,
+        		left: 0,
+        		width: "100%",
+        		height: "100vh",
+        		backgroundColor: "rgba(0, 0, 0, 0.1)",
+        		zIndex: 10000
+      		}}
+      		onClose={onClose}
+    	>
+      	<div
+      		style={{
+          		position: "fixed",
+          		top: "50%",
+          		left: "50%",
+          		transform: "translate(-50%, -50%)",
+          		backgroundColor: "white"
+        	}}
+      	>
+        <h1>{text.title} Is Title!</h1>
+        <h1>{text.content} Is Content!</h1>
+        <h1>really?</h1>
+      </div>
+    </div>
     )
 }
 
@@ -340,6 +367,8 @@ export default NewCustomModal
 ```
 
 you can use **props** for close modal, confirm modal, dismiss modal.
+
+props text is passed JSON text object.
 
 if you call props.onDismiss(), modal will return false and closed.
 
@@ -352,6 +381,8 @@ if you call props.onConfirm("wow"), modal will return "wow" and closed.
 ```javascript
 // App.js
 import { addCustomModal } from 'react-modal-supervisor'
+import NewCustomModal from './NewCustomModal.js'
+
 addCustomModal("MODAL_TYPE_NEW", NewCustomModal)
 ```
 

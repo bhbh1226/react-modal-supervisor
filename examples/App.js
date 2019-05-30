@@ -5,12 +5,15 @@ import NewCustomStyle from './NewCustomStyle';
 import './normalize.css'
 import AlertModal from '../src/modal/alertModal/AlertModal';
 
-const NewCustomModal = ({children, onClose}) => {
+const NewCustomModal = ({text, onClose}) => {
     return (
-        <AlertModal onClose={onClose}>
-            {children}
-            <h1>really?</h1>
-        </AlertModal>
+        <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', backgroundColor: 'rgba(0, 0, 0, 0.1)', zIndex: 10000}} onClose={onClose}>
+            <div style={{position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white'}} >
+                <h1>{text.title} Is Title!</h1>
+                <h1>{text.content} Is Content!</h1>
+                <h1>really?</h1>
+            </div>
+        </div>
     )
 }
 

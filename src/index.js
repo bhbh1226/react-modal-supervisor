@@ -201,9 +201,9 @@ class ModalSupervisor extends Component {
                                                         onConfirm={(param) => {modal_info.confirm(param); this.actions.setModalResult.bind(this)(idx, param)}}
                                                         onClose={() => {this.actions.setModalResult.bind(this)(idx, true)}}
                                                         onDismiss={() => {modal_info.dismiss(); this.actions.setModalResult.bind(this)(idx, false)}}
-                                                        {...modal_info.props}>
-                                                        <h1>{modal_info.text}</h1>
-                                                    </modalType.component>
+                                                        text={modal_info.text}
+                                                        {...modal_info.props}
+                                                        />
                                                 )
                                             }
                                         }
