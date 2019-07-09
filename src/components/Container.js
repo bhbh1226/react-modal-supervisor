@@ -102,8 +102,9 @@ const ModalActionContainer = styled.div`
 
 const PromptInputText = styled.input.attrs(props => {
     return {
+        autoFocus: true,
         onKeyPress: (e) => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && props.confirm) {
                 props.confirm()
             }
         }
