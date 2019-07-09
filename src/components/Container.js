@@ -100,7 +100,16 @@ const ModalActionContainer = styled.div`
     box-sizing: border-box;
 `
 
-const PromptInputText = styled.input`
+const PromptInputText = styled.input.attrs(props => {
+    return {
+        onKeyPress: (e) => {
+            console.log(e.key)
+            if (e.key === 'Enter') {
+                props.confirm()
+            }
+        }
+    }
+})`
     width: 100%;
 
     margin: 1em 0;

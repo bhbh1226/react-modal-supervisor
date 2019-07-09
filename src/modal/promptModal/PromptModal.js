@@ -29,7 +29,7 @@ class PromptModal extends Component {
                             <p>{this.props.text.content}</p>
                         )
                     }
-                    <PromptInputText type="text" value={this.state.inputValue} placeholder={this.props.text.placeholder || "Please Write Anything"} onChange={(e) => {this.setState({inputValue: e.target.value})}}/>
+                    <PromptInputText type="text" value={this.state.inputValue} placeholder={this.props.text.placeholder || "Please Write Anything"} confirm={() => {this.props.onConfirm(this.state.inputValue)}} onChange={(e) => {this.setState({inputValue: e.target.value})}}/>
                     <ModalActionContainer>
                         <DismissButton onClick={() => {this.props.onDismiss(this.state.inputValue)}}>Dismiss</DismissButton>
                         <ConfirmButton onClick={() => {this.props.onConfirm(this.state.inputValue)}}>Confirm</ConfirmButton>
