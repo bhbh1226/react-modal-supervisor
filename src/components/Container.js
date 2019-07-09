@@ -103,7 +103,6 @@ const ModalActionContainer = styled.div`
 const PromptInputText = styled.input.attrs(props => {
     return {
         onKeyPress: (e) => {
-            console.log(e.key)
             if (e.key === 'Enter') {
                 props.confirm()
             }
