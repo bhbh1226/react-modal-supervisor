@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
+import { media } from './StyledComponents';
 
 /* base components */
 
@@ -86,7 +87,7 @@ const ModalInner = styled.div.attrs(props => {
 
     position: relative;
 
-    min-width: 22em;
+    min-width: 14em;
     max-width: 28em;
     min-height: 10em;
 
@@ -97,6 +98,25 @@ const ModalInner = styled.div.attrs(props => {
     background-color: white;
 
     box-shadow: 15px 19px 32px -18px rgba(21,19,19,.07);
+
+    ${media.desktop`
+        padding: 3em;
+        padding-bottom: 4em;
+        width: 28em;
+        /* min-height: 10em; */
+    `}
+    ${media.tablet`
+        padding: 2em;
+        padding-bottom: 4em;
+        width: 22em;
+        /* min-height: 14em; */
+    `}
+    ${media.phone`
+        padding: 1.2em;
+        padding-bottom: 4em;
+        width: 14em;
+        /* min-height: 20em; */
+    `}
 `
 
 const ModalActionContainer = styled.div`
@@ -128,7 +148,7 @@ const PromptInputText = styled.input.attrs({
     outline: none;
 
     /* &::placeholder {
-        color: white;
+        color:  white;
     } */
 `
 
