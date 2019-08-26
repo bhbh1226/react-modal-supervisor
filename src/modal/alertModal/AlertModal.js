@@ -7,7 +7,9 @@ class AlertModal extends Component {
     render() {
         return (
             <ModalBackground>
-                <ModalInner>
+                <ModalInner
+                    confirm={this.props.onClose}
+                    dismiss={this.props.onClose}>
                     {
                         this.props.text.title && (
                             <h1>{this.props.text.title}</h1>

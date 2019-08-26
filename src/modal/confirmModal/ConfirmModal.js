@@ -9,7 +9,9 @@ class ConfirmModal extends Component {
     render() {
         return (
             <ModalBackground>
-                <ModalInner>
+                <ModalInner
+                    confirm={this.props.onConfirm} 
+                    dismiss={this.props.onDismiss}>
                     {
                         this.props.text.title && (
                             <h1>{this.props.text.title}</h1>

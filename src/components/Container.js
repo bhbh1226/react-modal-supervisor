@@ -65,7 +65,18 @@ const ModalBackground = styled(FullScreen)`
     z-index: 90000;
 `
 
-const ModalInner = styled.div`
+const ModalInner = styled.div.attrs(props => {
+    return {
+        tabIndex: -1,
+        onKeyUp: (e) => {
+            if (e.key === 'Enter' && props.confirm) {
+                props.confirm()
+            } else if (e.key === 'Escape' && props.dismiss) {
+                props.dismiss()
+            }
+        }
+    }
+})`
     @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR');
 
     ${flexColumn}
@@ -100,15 +111,8 @@ const ModalActionContainer = styled.div`
     box-sizing: border-box;
 `
 
-const PromptInputText = styled.input.attrs(props => {
-    return {
-        autoFocus: true,
-        onKeyPress: (e) => {
-            if (e.key === 'Enter' && props.confirm) {
-                props.confirm()
-            }
-        }
-    }
+const PromptInputText = styled.input.attrs({
+    autoFocus: true
 })`
     width: 100%;
 

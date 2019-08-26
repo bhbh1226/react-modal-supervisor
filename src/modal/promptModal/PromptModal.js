@@ -18,7 +18,9 @@ class PromptModal extends Component {
     render() {
         return (
             <ModalBackground>
-                <ModalInner>
+                <ModalInner 
+                    confirm={() => {this.props.onConfirm(this.state.inputValue)}} 
+                    dismiss={() => {this.props.onDismiss(this.state.inputValue)}} >
                     {
                         this.props.text.title && (
                             <h1>{this.props.text.title}</h1>
@@ -29,11 +31,18 @@ class PromptModal extends Component {
                             <p>{this.props.text.content}</p>
                         )
                     }
-                    <PromptInputText type="text" value={this.state.inputValue} placeholder={this.props.text.placeholder || "Please Write Anything"} confirm={() => {this.props.onConfirm(this.state.inputValue)}} onChange={(e) => {this.setState({inputValue: e.target.value})}}/>
+                    <PromptInputText type="text" list="data-lists" value={this.state.inputValue} placeholder={this.props.text.placeholder || "Please Write Anything"} onChange={(e) => {this.setState({inputValue: e.target.value})}}/>
                     <ModalActionContainer>
                         <DismissButton onClick={() => {this.props.onDismiss(this.state.inputValue)}}>Dismiss</DismissButton>
                         <ConfirmButton onClick={() => {this.props.onConfirm(this.state.inputValue)}}>Confirm</ConfirmButton>
                     </ModalActionContainer>
+                    <datalist id="data-lists">
+                        {
+                            this.props.datalists.map(item => {
+                                return <option value={item}/>
+                            })
+                        }
+                    </datalist>
                 </ModalInner>
             </ModalBackground>
         )
@@ -41,6 +50,7 @@ class PromptModal extends Component {
 }
 
 PromptModal.propTypes = {
+    datalists: PropTypes.arrayOf(PropTypes.string),
     onPrompt: PropTypes.func,
     onDismiss: PropTypes.func,
 }
