@@ -37,8 +37,8 @@ class PromptModal extends Component {
                         <ConfirmButton onClick={() => {this.props.onConfirm(this.state.inputValue)}}>Confirm</ConfirmButton>
                     </ModalActionContainer>
                     <datalist id="data-lists">
-                        {
-                            this.props.datalists.map(item => {
+                        { // options로 대체해야함
+                            this.props.datalists && this.props.datalists.map(item => {
                                 return <option value={item}/>
                             })
                         }
