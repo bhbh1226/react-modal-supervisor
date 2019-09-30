@@ -38,8 +38,8 @@ class PromptModal extends Component {
                     </ModalActionContainer>
                     <datalist id="data-lists">
                         { // options로 대체해야함
-                            this.props.datalists && this.props.datalists.map(item => {
-                                return <option value={item}/>
+                            (this.props.datalists !== undefined && this.props.datalists !== null) && this.props.datalists.map(item => {
+                                return <option key={item} value={item}/>
                             })
                         }
                     </datalist>

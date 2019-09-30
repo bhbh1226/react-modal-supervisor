@@ -56,7 +56,6 @@ class MainPage extends Component {
                     )}}>Confirm Modal</Button>
                 <Button onClick={async () => {await this.props.modalActions.createModal("MODAL_TYPE_PROMPT", 
                     {title: "Are you sure?", content: "Are you sure about that? You think half about it. Just stop your crying It's a sign of the times Welcome to the final show Hope you're wearing your best clothes You can't bribe the door on your way to the sky You look pretty good down here But you ain't really good", placeholder: "Please Write Anything"}, 
-                    
                     )}}>Prompt Modal</Button>
                 <Button onClick={() => {this.props.modalActions.createModal("MODAL_TYPE_LOADING"); setTimeout(async () => {
                     await this.props.modalActions.popModal()
