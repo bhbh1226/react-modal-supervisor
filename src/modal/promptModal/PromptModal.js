@@ -13,9 +13,6 @@ class PromptModal extends Component {
         this.state = {
             inputValue: ''
         }
-
-        console.log('1' + this.props.datalist !== undefined)
-        console.log('2' + this.props.datalist !== null)
     }
 
     render() {
