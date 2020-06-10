@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { hot } from 'react-hot-loader'
 
 import App from "./App";
-import MainPage from './containers/MainPage';
+import MainPage from './containers/MainPage'; // with HOC
+import SubPage from './containers/SubPage'; // with useContext
 
 class AppRouter extends React.Component {
     render() {
@@ -11,7 +12,7 @@ class AppRouter extends React.Component {
         <Router>
             <App>
                 <Switch>
-                    <Route path="/" component={MainPage}/>
+                    <Route path="/" component={SubPage}/>
                 </Switch>
             </App>
         </Router>

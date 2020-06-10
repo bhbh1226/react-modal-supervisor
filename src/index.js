@@ -8,8 +8,8 @@ import PromptModal from './modal/promptModal/PromptModal';
 
 import * as StyleManager from './components/StyleManager'
 
-const Context = createContext();
-const { Provider, Consumer: PageContextConsumer } = Context; 
+const ModalContext = createContext();
+const { Provider, Consumer: PageContextConsumer } = ModalContext; 
 
 /* CONSTANTS */
 
@@ -162,7 +162,7 @@ class ModalSupervisor extends Component {
 
     render() {
         const { state, actions } = this;
-        const value = { state, actions };
+        const value = { modalState: state, modalActions: actions };
 
         return (
             <div id="modal-supervisor">
@@ -221,10 +221,10 @@ let ModalSupervisorHOC = (WrappedComponent) => (props) => {
     return (
         <PageContextConsumer>
             {
-                ({ state, actions }) => (
+                ({ modalState, modalActions }) => (
                     <WrappedComponent
-                        modalState={state}
-                        modalActions={actions}
+                        modalState={modalState}
+                        modalActions={modalActions}
                         {...props}
                     />
                 )
@@ -241,6 +241,8 @@ export {
     // MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING, MODAL_TYPE_PROMPT,
     ModalSupervisorHOC,
     modalRootInit,
+    ModalContext,
     addCustomModal,
-    StyleManager };
+    StyleManager
+};
 export default ModalSupervisor;
