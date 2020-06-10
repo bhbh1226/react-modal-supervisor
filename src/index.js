@@ -1,4 +1,4 @@
-import React, { Component, createContext } from 'react';
+import React, { Component, Fragment, createContext } from 'react';
 
 import Modal from './modal/Modal';
 import AlertModal from './modal/alertModal/AlertModal';
@@ -19,14 +19,6 @@ let MODAL_TYPE = [
     {type: "MODAL_TYPE_LOADING", component: LoadingModal},
     {type: "MODAL_TYPE_PROMPT", component: PromptModal},
 ]
-
-/* INITALIZE */
-
-const modalRootInit = () => {
-    const ModalRoot = document.createElement('div')
-    ModalRoot.id = "modal-root"
-    document.querySelector('body').appendChild(ModalRoot)
-}
 
 class ModalSupervisor extends Component {
     constructor(props) {
@@ -165,7 +157,7 @@ class ModalSupervisor extends Component {
         const value = { modalState: state, modalActions: actions };
 
         return (
-            <div id="modal-supervisor">
+            <Fragment>
                 <Provider value={value}>
                     {this.props.children}
                     <Modal>
@@ -212,7 +204,7 @@ class ModalSupervisor extends Component {
                         }
                     </Modal>
                 </Provider>
-            </div>
+            </Fragment>
         )
     }
 }
@@ -240,7 +232,6 @@ const addCustomModal = (type, component) => {
 export { 
     // MODAL_TYPE_ALERT, MODAL_TYPE_CONFIRM, MODAL_TYPE_LOADING, MODAL_TYPE_PROMPT,
     ModalSupervisorHOC,
-    modalRootInit,
     ModalContext,
     addCustomModal,
     StyleManager

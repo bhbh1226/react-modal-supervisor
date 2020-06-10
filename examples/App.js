@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import ModalSupervisor, { modalRootInit, addCustomModal } from '../src';
+import ModalSupervisor, { addCustomModal } from '../src';
 
 import NewCustomStyle from './NewCustomStyle';
 import './normalize.css'
@@ -16,8 +16,6 @@ const NewCustomModal = ({text, onClose}) => {
         </div>
     )
 }
-
-modalRootInit()
 // NewCustomStyle()
 addCustomModal("MODAL_TYPE_WOW", NewCustomModal)
 

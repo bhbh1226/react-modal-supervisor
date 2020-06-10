@@ -8,59 +8,6 @@
 
 :gift_heart: ​Modal Supervisor Based-on React Context API & JS Array 
 
-
-
-- [Demo](#demo)
-
-- [Installation](#installation)
-
-- [Basic Usage](#basic-usage)
-
-  - [Supervisor Setup](#supervisor-setup)
-    - [Initalizing in App.js](#initalizing-in-app.js)
-
-  - [Create Modal](#create-modal)
-
-    - [in HOC](#in-hoc)
-    - [with callback function](#with-callback-function)
-    - [with promise](#with-promise)
-
-    - [with async/await](#with-async/await)
-
-  - [Passing Props](#passing-props)
-
-    - [CreateModal General](#createmodal-general)
-    - [MODAL_TYPE](#modal_type)
-
-    - [TEXT_JSON](#text-json)
-
-    - [PROPS_JSON](#props-json)
-
-- [ADVANCE Usage](#advance-usage)
-
-  - [standard modal's style override](#standard-modal's-style-override)
-    - [Create NewCustomStyle Component](#create-newcustomstyle-component)
-    - [Apply Custom Style](#apply-custom-style)
-    - [CUSTOM_STYLE_TYPES](#custom_style_types)
-  - [Add Custom Modal](#add-custom-modal)
-    - [Create Custom Modal](#create-custom-modal)
-    - [Add Custom Modal to Supervisor](!add-custom-modal-to-supervisor)
-    - [Use in MainPage.js](#use in mainpage.js)
-
-- [Documents](#documents)
-
-  - [Modal Context Provider's Actions List](#modal-context-provider's-actions-list)
-
-  - [MODAL_TYPES TABLE](#modal_types-table)
-  - [CUSTOM_STYLE_TYPES TABLE](#custom_style_types-table)
-  - [TEXT_JSON type TABLE](#text_JSON-type-table)
-
-- [Issues](#issues)
-
-- [Made by](#made-by)
-
-
-
 ## Demo
 
 [![Edit react-modal-supervisor demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/competent-elgamal-pd6d5?fontsize=14)
@@ -70,7 +17,8 @@ or
 ```bash
 $ git clone https://github.com/bhbh1226/react-modal-supervisor.git
 $ cd react-modal-supervisor
-$ yarn run dev-server
+$ npm install
+$ npm run dev-server
 ```
 
 
@@ -101,11 +49,9 @@ First, Because ModalSupervisor based on Context API's Provider, It should be pla
 // App.js
 // import modules
 import React from 'react'
-import ModalSupervisor, { modalRootInit } from 'react-modal-supervisor'
+import ModalSupervisor from 'react-modal-supervisor'
 import MainPage from './MainPage.js'
 
-// init modal-root element. this function is REQUIRED.
-modalRootInit()
 
 // App components
 function App() {
@@ -153,7 +99,32 @@ function MainPage(props) {
 export default ModalSupervisorHOC(MainPage)
 ```
 
+#### in useContext
 
+after react supports *useContext*, our library can use useContext since 1.5.0
+
+this way is more pretty and more comfortable than using HOC
+
+```javascript
+import React, { useContext } from 'react'
+import { ModalContext } from 'react-modal-supervisor'
+
+function MainPage(props) {
+  const { modalActions } = useContext(ModalContext)
+  
+  return (
+		<div id='main-page'>
+			<button onClick={() => {
+          modalActions.createModal('MODAL_TYPE_ALERT', {
+					title: 'Hello World!', 
+					content: 'nothing better'
+				})}}/>
+		</div>
+	)
+}
+
+export default MainPage
+```
 
 #### with callback function
 
