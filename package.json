@@ -1,6 +1,6 @@
 {
   "name": "react-modal-supervisor",
-  "version": "1.5.1",
+  "version": "1.5.0",
   "description": "react modal supervisor based-on Array! & promise",
   "keywords": [
     "react",
@@ -24,9 +24,7 @@
   "scripts": {
     "compile": "webpack --config webpack.prod.js",
     "dev-compile": "webpack --config webpack.dev.js --watch",
-    "dev-server": "webpack-dev-server --config webpack.dev.js",
-    "node-server": "node .\\server.js",
-    "nodemon": "nodemon .\\server.js localhost 8001"
+    "dev-server": "webpack-dev-server --config webpack.dev.js"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
