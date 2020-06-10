@@ -96,6 +96,7 @@ const ModalInner = styled.div.attrs(props => {
 
     border-radius: 5px;
     background-color: white;
+    color: black;
 
     box-shadow: 15px 19px 32px -18px rgba(21,19,19,.07);
 
